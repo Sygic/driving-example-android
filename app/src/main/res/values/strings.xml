@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Driving</string>
+    <string name="notif_channel">Driving</string>
+    <string name="notif_channel_description">Driving</string>
+</resources>
