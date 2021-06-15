@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.telephony.TelephonyManager
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.sygic.driving.Configuration
 import com.sygic.driving.Driving
 import com.sygic.driving.VehicleSettings
@@ -18,10 +18,13 @@ import com.sygic.driving.api.TripsView
 import com.sygic.driving.api.UserStats
 import java.util.Date
 
+// Set to false if you want to stop trip detection when app is not running
+private const val RUN_IN_BACKGROUND = true
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var drivingViewModel: DrivingViewModel
+    private val drivingViewModel: DrivingViewModel by viewModels()
+
     private lateinit var drivingEventsListener: DrivingEventListener
 
     private lateinit var btnLastTrips: Button
@@ -58,7 +61,6 @@ class MainActivity : AppCompatActivity() {
 
         textTripState = findViewById(R.id.tvTripState)
 
-        drivingViewModel = ViewModelProviders.of(this).get(DrivingViewModel::class.java)
         drivingViewModel.isInTrip.observe(this, Observer {
             isInTrip -> changeTripState(isInTrip)
         })
@@ -71,22 +73,20 @@ class MainActivity : AppCompatActivity() {
             initSygicDriving()
         }
         else {
-            with(Driving.getInstance()) {
-                addEventListener(drivingEventsListener)
-                drivingViewModel.isInTrip.value = isTripRunning
-            }
-
+            enableButtons(true)
+            setupSygicDriving()
         }
     }
 
     override fun onDestroy() {
         if(Driving.isInitialized) {
-            Driving.getInstance().apply {
-                // uncomment if you want to stop trip detection while app is not running
-//                if(!isChangingConfigurations)
-//                    disableTripDetection()
-
+            with(Driving.getInstance()) {
                 removeEventListener(drivingEventsListener)
+
+                if(!RUN_IN_BACKGROUND && !isChangingConfigurations) {
+                    disableTripDetection()
+                    Driving.deinitialize()
+                }
             }
         }
         super.onDestroy()
@@ -103,27 +103,13 @@ class MainActivity : AppCompatActivity() {
 
 
         val initListener = object: Driving.InitListener {
-            override fun onInitStateChanged(state: Int) {
-                if (state == Driving.STATE_INITIALIZED) {
-                    with(Driving.getInstance()) {
-                        enableButtons(true)
-
-                        ensurePermissions(this@MainActivity)
-                        addEventListener(drivingEventsListener)
-                        enableTripDetection()
-                        drivingViewModel.isInTrip.value = isTripRunning
-
+            override fun onInitStateChanged(state: Driving.InitState) {
+                when(state) {
+                    Driving.InitState.Initialized -> {
                         logger.log("Driving lib initialized successfully")
+                        setupSygicDriving()
                     }
-                }
-                else {
-                    val error = when (state) {
-                        Driving.STATE_FAILED_INCOMPATIBLE_HARDWARE -> "Device is not compatible"
-                        Driving.STATE_FAILED_INVALID_LICENSE -> "Invalid license"
-                        else -> "State is $state"
-                    }
-
-                    logger.log("Failed to initialize Driving lib: $error")
+                    else -> logger.log("Failed to initialize Driving lib: $state")
                 }
             }
         }
@@ -139,6 +125,15 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
         Driving.initialize(initializer)
+    }
+
+    private fun setupSygicDriving() {
+        with(Driving.getInstance()) {
+            addEventListener(drivingEventsListener)
+            enableTripDetection()
+
+            drivingViewModel.isInTrip.value = isTripRunning
+        }
     }
 
     private fun getCountryIso(): String {
@@ -191,7 +186,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun lastTripDetails() {
         getLastTrips {
-            if(it.trips.size > 0) {
+            if(it.trips.isNotEmpty()) {
                 val lastTripId = it.trips[0].externalId
                 getTripDetails(lastTripId)
             }
