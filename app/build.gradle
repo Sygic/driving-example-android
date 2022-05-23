@@ -80,9 +80,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     if (gradle.getDrivingLibPath().isEmpty()) {
-        def drivingLibraryVersion = "2.1.6"
-        gmsImplementation("com.sygic.adas:driving:$drivingLibraryVersion")
-        hmsImplementation("com.sygic.adas:driving-hms:$drivingLibraryVersion")
+        gmsImplementation("com.sygic.adas:driving:$driving_version")
+        hmsImplementation("com.sygic.adas:driving-hms:$driving_version")
     } else {
         implementation project(':driving-lib')
     }
