@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/realtimeFragment">
+
+    <fragment
+        android:id="@+id/realtimeFragment"
+        android:name="com.sygic.driving.testapp.ui.realtime.RealtimeFragment"
+        android:label="fragment_realtime"
+        tools:layout="@layout/fragment_realtime" >
+        <action
+            android:id="@+id/action_realtimeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_realtimeFragment_to_serverTripsFragment"
+            app:destination="@id/serverTripsFragment" />
+        <action
+            android:id="@+id/action_realtimeFragment_to_localTripsFragment"
+            app:destination="@id/localTripsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/serverTripsFragment"
+        android:name="com.sygic.driving.testapp.ui.server_trips.ServerTripsFragment"
+        android:label="ServerTripsFragment"
+        tools:layout="@layout/fragment_server_trips">
+        <action
+            android:id="@+id/action_serverTripsFragment_to_tripDetailsFragment"
+            app:destination="@id/tripDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.sygic.driving.testapp.ui.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        />
+    <fragment
+        android:id="@+id/localTripsFragment"
+        android:name="com.sygic.driving.testapp.ui.local_trips.LocalTripsFragment"
+        android:label="fragment_local_trips"
+        tools:layout="@layout/fragment_local_trips" >
+        <action
+            android:id="@+id/action_localTripsFragment_to_tripDetailsFragment"
+            app:destination="@id/tripDetailsFragment"
+            app:launchSingleTop="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripDetailsFragment"
+        android:name="com.sygic.driving.testapp.ui.trip_details.TripDetailsFragment"
+        android:label="TripDetailsFragment" >
+        <argument
+            android:name="storage"
+            app:argType="com.sygic.driving.testapp.domain.driving.model.DrivingTripStorage" />
+        <argument
+            android:name="tripId"
+            app:argType="string" />
+    </fragment>
+</navigation>

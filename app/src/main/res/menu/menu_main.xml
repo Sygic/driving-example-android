@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/realtimeFragment"
+            android:icon="@drawable/ic_speed"
+            android:title="@string/navi_realtime"/>
+
+    <item
+            android:id="@+id/serverTripsFragment"
+            android:icon="@drawable/ic_cloud"
+            android:title="@string/navi_trips"/>
+
+    <item
+            android:id="@+id/localTripsFragment"
+            android:icon="@drawable/ic_storage"
+            android:title="@string/navi_local_trips"/>
+
+    <item
+            android:id="@+id/settingsFragment"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/navi_settings"/>
+
+</menu>

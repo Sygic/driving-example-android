@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/showOnMap"
+        android:title="@string/local_trip.show_details" />
+
+    <item
+        android:id="@+id/simulate"
+        android:title="@string/local_trip.simulate" />
+
+    <item
+        android:id="@+id/send"
+        android:title="@string/local_trip.send" />
+
+    <item
+        android:id="@+id/delete"
+        android:title="@string/local_trip.delete" />
+</menu>

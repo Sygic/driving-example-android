@@ -1,2 +1,10 @@
+apply from: 'buildExt.gradle'
+
 include ':app'
-rootProject.name='Driving'
+rootProject.name='DrivingTestApp'
+
+def drivingLibPath = gradle.getDrivingLibPath()
+if (!drivingLibPath.isEmpty()) {
+    include ":driving-lib"
+    project(":driving-lib").projectDir = file(drivingLibPath)
+}

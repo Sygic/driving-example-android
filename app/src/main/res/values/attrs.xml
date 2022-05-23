@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LiveValueView">
+        <attr name="description" format="string" />
+    </declare-styleable>
+
+    <attr name="colorWarning" format="reference|color" />
+    <attr name="colorSuccess" format="reference|color" />
+</resources>

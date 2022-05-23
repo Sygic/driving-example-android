@@ -1,0 +1,27 @@
+gradle.ext.getDrivingLibPath = {
+    final def properties = new Properties()
+    final def localProperties = file('local.properties')
+    properties.load(localProperties.newDataInputStream())
+
+    final def libPath = properties.getProperty("driving.lib.dir", "")
+    if(libPath.isEmpty())
+        return ""
+
+    final def libDir = file(libPath)
+    if (!libDir.exists())
+        throw GradleException("'driving.lib.dir' has path '${libDir.getAbsolutePath()}', but it does not exist")
+
+    return "${libDir.getAbsolutePath()}"
+}
+
+gradle.ext.getSygicLicense = {
+    final def properties = new Properties()
+    final def localProperties = file('local.properties')
+    properties.load(localProperties.newDataInputStream())
+
+    final def sygicLicense = properties.getProperty("sygic.license", "")
+    if(sygicLicense.isEmpty())
+        logger.warn("'sygic.license' is empty. You need a license to make app working!")
+
+    return sygicLicense
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- key names -->
+    <string name="key_automatic_trip_detection">tripDetection</string>
+    <string name="key_developer_mode">developerMode</string>
+    <string name="key_motion_activity">motionActivity</string>
+    <string name="key_disable_detection_battery_lower_than">disableTripDetectionIfBatteryLowerThan</string>
+    <string name="key_disable_detection_power_saver">disableTripDetectionInPowerSaverMode</string>
+    <string name="key_battery_optimization">batteryOptimization</string>
+    <string name="key_app_version">version</string>
+    <string name="key_user_id">user</string>
+    <string name="key_end_trips_automatically">endTripsAutomatically</string>
+    <string name="key_min_trip_duration">minimalTripDuration</string>
+    <string name="key_min_trip_length">minimalTripLength</string>
+
+    <string name="key_category_trip_detection">categoryTripDetection</string>
+    <string name="key_category_trips">categoryTrips</string>
+    <string name="key_category_general">categoryGeneral</string>
+
+    <!-- default values -->
+    <bool name="default_automatic_trip_detection">true</bool>
+    <bool name="default_developer_mode">false</bool>
+    <bool name="default_motion_activity">true</bool>
+    <integer name="default_disable_detection_battery_lower_than">0</integer>
+    <bool name="default_disable_detection_power_saver">false</bool>
+    <integer name="default_battery_optimization">0</integer>
+    <bool name="default_end_trips_automatically">true</bool>
+    <integer name="default_min_trip_duration">90</integer>
+    <integer name="default_min_trip_length">300</integer>
+
+</resources>

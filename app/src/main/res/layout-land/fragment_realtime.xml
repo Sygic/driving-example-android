@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:custom="http://schemas.android.com/com.sygic.driving.testapp.view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layoutContainer"
+        tools:context=".ui.realtime.RealtimeFragment">
+
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorError"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:textColor="@android:color/background_light"
+        tools:text="Driving not initialized" />
+
+    <RelativeLayout
+        android:id="@+id/warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/error"
+        android:background="?attr/colorWarning"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@android:color/background_light"
+            android:text="@string/realtime_bg_permission_warning_text"
+            android:layout_alignParentStart="true"
+            android:maxLines="3"
+            android:layout_toStartOf="@+id/btnGrant"
+            android:layout_marginEnd="5dp"
+            android:layout_centerVertical="true"
+            />
+
+        <Button
+            android:id="@+id/btnGrant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_grant"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
+
+
+
+    <Button
+            android:text="@string/realtime_button_start_trip"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnStartTrip"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+    />
+    <Button
+            android:text="@string/realtime_button_end_trip"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/btnStartTrip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:id="@+id/btnEndTrip"
+        />
+
+    <Button
+            android:text="@string/realtime_button_stop_simulation"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:id="@+id/btnStopSimulation"
+        />
+
+    <TextView
+        android:id="@+id/tvIsInTrip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/warning"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:textSize="20sp"
+        tools:text="IS IN TRIP" />
+
+    <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="5"
+            android:layout_above="@+id/btnStartTrip"
+            android:stretchColumns="0,1,2,3,4"
+            android:layout_margin="@dimen/default_margin"
+            >
+
+        <TableRow>
+
+            <com.sygic.driving.testapp.core.ui_components.LiveValueView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/liveStartTime"
+                    />
+
+            <com.sygic.driving.testapp.core.ui_components.LiveValueView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/liveDistance"
+                    android:layout_gravity="center_horizontal"
+                    custom:description="Distance"
+                    />
+
+
+            <com.sygic.driving.testapp.core.ui_components.LiveValueView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/liveDuration"
+                android:layout_gravity="center_horizontal"
+                custom:description="Duration"
+                />
+
+            <com.sygic.driving.testapp.core.ui_components.LiveValueView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/liveSpeed"
+                android:layout_gravity="center_horizontal"
+                custom:description="Speed"
+                />
+
+            <com.sygic.driving.testapp.core.ui_components.LiveValueView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/liveAltitude"
+                android:layout_gravity="center_horizontal"
+                custom:description="Altitude"
+                />
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+    <TextView
+        android:id="@+id/tvAngle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/warning"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="12dp"
+        android:text="50.0"
+        android:textSize="20dp" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvAngle"
+        android:layout_centerHorizontal="true"
+        android:columnCount="5"
+        android:rowCount="2">
+
+        <TextView
+            android:id="@+id/tvTitleA"
+            android:layout_width="90dp"
+            android:alpha="0.5"
+            android:gravity="center"
+            android:text="A"
+            android:textSize="@dimen/size_rt_big_char" />
+
+        <TextView
+            android:id="@+id/tvTitleB"
+            android:layout_width="90dp"
+            android:alpha="0.5"
+            android:gravity="center"
+            android:text="B"
+            android:textSize="@dimen/size_rt_big_char" />
+
+        <TextView
+            android:id="@+id/tvTitleC"
+            android:layout_width="90dp"
+            android:alpha="0.5"
+            android:gravity="center"
+            android:text="C"
+            android:textSize="@dimen/size_rt_big_char" />
+
+        <TextView
+            android:id="@+id/tvTitleD"
+            android:layout_width="90dp"
+            android:alpha="0.5"
+            android:gravity="center"
+            android:text="D"
+            android:textSize="@dimen/size_rt_big_char" />
+
+        <TextView
+            android:id="@+id/tvTitleH"
+            android:layout_width="90dp"
+            android:alpha="0.5"
+            android:gravity="center"
+            android:text="H"
+            android:textSize="@dimen/size_rt_big_char" />
+
+        <TextView
+            android:id="@+id/tvA"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvB"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvC"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvD"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvH"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center"
+            android:textSize="20sp" />
+
+    </GridLayout>
+
+
+</RelativeLayout>

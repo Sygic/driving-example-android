@@ -1,5 +1,117 @@
 <resources>
-    <string name="app_name">Driving</string>
-    <string name="notif_channel">Driving</string>
-    <string name="notif_channel_description">Driving</string>
+    <string name="app_name">Driver</string>
+    <string name="title_main_activity">Driver</string>
+
+    <string name="notif_channel" translatable="false">Driving</string>
+    <string name="notif_channel_description">Driving notifications</string>
+
+    <string name="no_value" translatable="false">---</string>
+    <string name="char_other_options" translatable="false">⋮</string>
+    <string name="char_arrow_right" translatable="false">→</string>
+    <string name="value_of_km" translatable="false">%1$s km</string>
+    <string name="value_of_sec" translatable="false">%1$s s</string>
+    <string name="value_of_g" translatable="false">%1$sG</string>
+
+    <string name="navi_local_trips">Local trips</string>
+    <string name="navi_map">Map</string>
+    <string name="navi_trips">Server trips</string>
+    <string name="navi_realtime">Realtime</string>
+    <string name="navi_settings">Settings</string>
+
+    <string name="button_grant">Grant</string>
+    <string name="button_dismiss">Dismiss</string>
+
+    <string name="notification.recording_trips">Recording trips</string>
+    <string name="notification.trip_running">Trip running</string>
+
+    <string name="error_driving_invalid_license">Invalid license</string>
+    <string name="error_driving_incompatible_hardware">Incompatible hardware</string>
+    <string name="error_driving_other">Other error</string>
+
+    <string name="realtime_in_trip">is in trip</string>
+    <string name="realtime_not_in_trip">not in trip</string>
+    <string name="realtime_possibly_in_trip">possibly in trip</string>
+    <string name="realtime_button_start_trip">Start trip</string>
+    <string name="realtime_button_end_trip">End trip</string>
+    <string name="realtime_button_stop_simulation">Stop simulation</string>
+    <string name="realtime_start_time">Start time</string>
+    <string name="realtime_altitude">Relative alt. (m)</string>
+    <string name="realtime_distance_driven">Distance (km)</string>
+    <string name="realtime_trip_start">Trip start</string>
+    <string name="realtime_trip_duration">Trip duration</string>
+    <string name="realtime_speed">Speed (km/h)</string>
+    <string name="realtime_trip_discarded_distance">Trip discarded: distance too short</string>
+    <string name="realtime_trip_discarded_duration">Trip discarded: duration too short</string>
+    <string name="realtime_bg_permission_dialog_title">Background location</string>
+    <string name="realtime_bg_permission_dialog_text">App needs this permission for automatic trip detection in the background.</string>
+    <string name="realtime_bg_permission_warning_text">Background location permission is not granted!</string>
+    <string name="realtime_error_driving_not_initialized">Driving is not initialized! %1$s</string>
+    <string name="realtime_error_driving_invalid_license">Invalid license</string>
+    <string name="realtime_error_driving_incompatible_hardware">Incompatible hardware</string>
+    <string name="realtime_error_driving_other_error">Other error</string>
+    <string name="realtime_warning_no_auto_trip_end">Trip will not end manually !</string>
+
+    <string name="settings_category_trip_detection">Trip detection</string>
+    <string name="settings_automatic_trip_detection">Automatic trip detection</string>
+    <string name="settings_motion_activity">Motion activity</string>
+    <string name="settings_motion_activity_desc">Use motion activity for trip detection</string>
+    <string name="settings_battery_threshold">Battery threshold</string>
+    <string name="settings_battery_threshold_desc">Disable trip detection if battery lower than: %1$d%%</string>
+    <string name="settings_disable_in_power_saver">Disable in power saver</string>
+    <string name="settings_disable_in_power_saver_desc">Disable trip detection in power saver mode</string>
+    <string name="settings_battery_optimization">Battery optimization</string>
+    <string name="settings_category_trips">Trips</string>
+    <string name="settings_minimal_trip_length">Minimal length</string>
+    <string name="settings_minimal_trip_length_desc">Minimal trip length: %1$d m</string>
+    <string name="settings_minimal_trip_duration">Minimal duration</string>
+    <string name="settings_minimal_trip_duration_desc">Minimal trip duration: %1$d s</string>
+    <string name="settings_end_trips_automatically">End trips automatically</string>
+    <string name="settings_end_trips_automatically_desc">If trip is started manually, can it be ended automatically?</string>
+    <string name="settings_category_general">General</string>
+    <string name="settings_user_id">User</string>
+    <string name="settings_developer_mode">Developer mode</string>
+    <string name="settings_app_version">App version (not lib version)</string>
+    <string name="settings_battery_optimization_unknown">Unknown</string>
+    <string name="settings_battery_optimization_enabled">Enabled! Tap to disable</string>
+    <string name="settings_battery_optimization_disabled">Disabled</string>
+    <string name="settings_battery_optimization_dialog_open_failed">Failed to open settings</string>
+
+    <string name="local_trip.uploaded">Uploaded</string>
+    <string name="local_trip.not_uploaded">Uploading</string>
+    <string name="local_trip.upload_error">Upload error(%1$d)</string>
+    <string name="local_trip.upload_unknown">\?</string>
+    <string name="local_trip.show_details">Show details</string>
+    <string name="local_trip.simulate">Simulate (4x)</string>
+    <string name="local_trip.delete">Delete</string>
+    <string name="local_trip.send">Send trip data</string>
+    <string name="local_trip.send_failed">Failed to get trip data</string>
+    <string name="local_trip.send.default_subject">Check out this trip</string>
+
+    <string name="trip_details.trip_name">Trip from %s</string>
+    <string name="trip_details.length">Length</string>
+    <string name="trip_details.duration">Duration</string>
+    <string name="trip_details.start_time">Start</string>
+    <string name="trip_details.end_time">End</string>
+    <string name="trip_details.start_reason">Start reason</string>
+    <string name="trip_details.end_reason">End reason</string>
+    <string name="trip_details.events_summary">Events</string>
+    <string name="trip_details.manual_trip">Mode</string>
+    <string name="trip_details.score_summary">Score</string>
+    <string name="trip_details.status">Status</string>
+    <string name="trip_details.trip">Trip</string>
+    <string name="trip_details.storage">Storage</string>
+
+    <string name="event_details.time">Time</string>
+    <string name="event_details.duration">Duration</string>
+    <string name="event_details.peak">Peak</string>
+    <string name="event_details.severity">Severity</string>
+
+    <string name="trip_event.name.acceleration">Acceleration</string>
+    <string name="trip_event.name.braking">Braking</string>
+    <string name="trip_event.name.cornering">Cornering</string>
+    <string name="trip_event.name.distraction">Distraction</string>
+    <string name="trip_event.name.speeding">Speeding</string>
+    <string name="trip_event.name.pothole">Pothole</string>
+    <string name="trip_event.name.harsh">Harsh</string>
+
 </resources>

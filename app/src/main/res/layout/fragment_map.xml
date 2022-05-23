@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".ui.MainActivity"
+>
+
+    <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            tools:context=".ui.MainActivity"
+    />
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/tvEventsCount"
+              android:textSize="18sp"
+              android:layout_margin="@dimen/default_margin"
+              android:padding="@dimen/text_margin"
+              android:background="#ffffff"
+              android:layout_gravity="bottom|center_horizontal"
+              android:visibility="gone"
+              tools:text="A:2  B:1  C:4  D:0  H:1"
+    />
+
+</FrameLayout>

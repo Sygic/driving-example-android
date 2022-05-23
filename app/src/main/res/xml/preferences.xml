@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        app:key="@string/key_category_trip_detection"
+        app:title="@string/settings_category_trip_detection">
+
+        <SwitchPreference
+            app:key="@string/key_automatic_trip_detection"
+            app:title="@string/settings_automatic_trip_detection"
+            app:defaultValue="@bool/default_automatic_trip_detection" />
+
+        <SwitchPreference
+            app:key="@string/key_motion_activity"
+            app:title="@string/settings_motion_activity"
+            app:summary="@string/settings_motion_activity_desc"
+            app:defaultValue="@bool/default_motion_activity" />
+
+
+        <SeekBarPreference
+            app:key="@string/key_disable_detection_battery_lower_than"
+            app:title="@string/settings_battery_threshold"
+            app:defaultValue="@integer/default_disable_detection_battery_lower_than"
+            app:min="0"
+            android:max="100"
+            app:seekBarIncrement="1" />
+
+        <SwitchPreference
+            app:key="@string/key_disable_detection_power_saver"
+            app:title="@string/settings_disable_in_power_saver"
+            android:summary="@string/settings_disable_in_power_saver_desc"
+            app:defaultValue="@bool/default_disable_detection_power_saver" />
+
+        <Preference
+            app:key="@string/key_battery_optimization"
+            app:title="@string/settings_battery_optimization"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="@string/key_category_trips"
+        app:title="@string/settings_category_trips">
+
+
+        <SeekBarPreference
+            app:key="@string/key_min_trip_length"
+            app:title="@string/settings_minimal_trip_length"
+            app:defaultValue="@integer/default_min_trip_length"
+            app:min="0"
+            android:max="1000"
+            app:seekBarIncrement="10" />
+
+
+        <SeekBarPreference
+            app:key="@string/key_min_trip_duration"
+            app:title="@string/settings_minimal_trip_duration"
+            app:defaultValue="@integer/default_min_trip_duration"
+            app:min="0"
+            android:max="300"
+            app:seekBarIncrement="1" />
+
+        <SwitchPreference
+            app:key="@string/key_end_trips_automatically"
+            app:title="@string/settings_end_trips_automatically"
+            app:summary="@string/settings_end_trips_automatically_desc"
+            app:defaultValue="@bool/default_end_trips_automatically" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="@string/key_category_general"
+        app:title="@string/settings_category_general">
+
+        <EditTextPreference
+            app:key="@string/key_user_id"
+            app:title="@string/settings_user_id"
+            />
+
+        <SwitchPreference
+            app:key="@string/key_developer_mode"
+            app:title="@string/settings_developer_mode"
+            app:defaultValue="@bool/default_developer_mode" />
+
+        <Preference
+            app:key="@string/key_app_version"
+            app:title="@string/settings_app_version"
+            />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
