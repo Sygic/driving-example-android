@@ -1,10 +1,20 @@
 # Driving sample app for Android
 
-This example demonstrates basic integration of Sygic Driving library.
+This example shows how to integrate Sygic Driving library.
 
 ## Usage
 1. Open project in Android studio.
-1. Update clientId and userId in Driving.initialize method. To get your client ID, please [contact](https://www.sygic.com/enterprise/contact-us) our support.
+1. Synchronize gradle project.
+1. In `local.properties` file set the license to `sygic.license` key. To get license key, please [contact our support](https://www.sygic.com/enterprise/contact-us).
 1. Run the app. 
 
 The best way to test the app is to drive a vehicle.
+
+## Migration guide from version 1.x
+To update library version in your project from 1.x to 2.x follow these steps:
+1. Update driving library version in your build.gradle to latest version.
+1. `initialize` method signature was changed. It is no longer asynchronous, so the result of initialization is returned immediately. Another important change is that Sygic license key must be provided. To get your license key, please [contact our support](https://www.sygic.com/enterprise/contact-us).
+1. Some constants like `DetectorState` and `TripState` were changed to enums.
+1. Some method overloads (e.g. `onTripUploaded`) were removed.
+1. `double` timestamps were replaced by `Date`, `GpsPosition` was replaced by `Location`.
+1. `TripValidityCriteria` can be set to discard trips that are too short. Default criterias are set to 90 seconds duration and 400 meters length. When trip is discarded, `onTripDiscarded` event is fired (instead of `onTripFinished`). Discarded trips are not sent to server and are automatically deleted.
