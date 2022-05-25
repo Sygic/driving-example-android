@@ -23,6 +23,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
+        manifestPlaceholders.googleMapsKey = gradle.getGoogleMapsKey()
     }
 
     defaultConfig {

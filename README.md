@@ -6,6 +6,7 @@ This example shows how to integrate Sygic Driving library.
 1. Open project in Android studio.
 1. Synchronize gradle project.
 1. In `local.properties` file set the license to `sygic.license` key. To get license key, please [contact our support](https://www.sygic.com/enterprise/contact-us).
+1. If you want to be able to see your trips on maps, add your Google Maps API key to `google.maps.key` in `local.properties`.
 1. Run the app. 
 
 The best way to test the app is to drive a vehicle.
