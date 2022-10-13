@@ -9,7 +9,7 @@ import com.sygic.driving.testapp.core.platform.notification.NotificationProvider
 import com.sygic.driving.testapp.core.settings.AppSettings
 import com.sygic.driving.testapp.core.settings.AppSettingsImpl
 import com.sygic.driving.testapp.core.utils.Constants
-import com.sygic.driving.testapp.core.utils.Constants.DRB_SERVER_URL
+import com.sygic.driving.testapp.core.utils.Constants.DRB_SERVER_DATA_URL
 import com.sygic.driving.testapp.data.driving.remote.DrbsApi
 import com.sygic.driving.testapp.data.driving.remote.utils.QueryConverterFactory
 import com.sygic.driving.testapp.data.repository.DrivingRepositoryImpl
@@ -59,7 +59,7 @@ object AppModule {
     @Singleton
     fun provideDrbsApi(gson: Gson, httpClient: OkHttpClient): DrbsApi {
         val retrofit = Retrofit.Builder()
-            .baseUrl(DRB_SERVER_URL)
+            .baseUrl(DRB_SERVER_DATA_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addConverterFactory(QueryConverterFactory.create())
             .client(httpClient)

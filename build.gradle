@@ -31,6 +31,7 @@ allprojects {
         google()
         mavenCentral()
         maven { url "https://public.repo.sygic.com/repository/maven-sygic-releases/" }
+        maven { url 'https://developer.huawei.com/repo/' }
     }
 }
 

@@ -24,6 +24,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -148,6 +149,8 @@ class DrivingManager @Inject constructor(
             .disableMotionActivity(!appSettings.enableMotionActivity.first())
             .tripValidityCriteria(getTripValidityCriteria())
             .localTripsPolicy(LocalTripsPolicy.Enabled)
+            .tripEndTimeout(TimeUnit.MINUTES.toSeconds(5).toInt())
+            .drivingServerUrl(Constants.DRB_SERVER_DEVICE_URL)
             .build()
     }
 

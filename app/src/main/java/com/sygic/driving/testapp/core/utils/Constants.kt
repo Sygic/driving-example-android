@@ -8,8 +8,9 @@ object Constants {
 
     const val SYGIC_LICENSE = BuildConfig.SYGIC_LICENSE
 
-    const val AUTH_URL = "https://auth.sygic.com/"
-    const val DRB_SERVER_URL = "https://adas-data-gw.api.sygic.com/"
+    const val AUTH_URL = "https://auth-testing.api.sygic.com/"
+    const val DRB_SERVER_DATA_URL = "https://adas2-data-gw-testing.api.sygic.com/"
+    const val DRB_SERVER_DEVICE_URL = "https://adas2-device-gw-testing.api.sygic.com/"
 
     const val ISO_8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 

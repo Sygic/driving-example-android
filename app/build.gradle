@@ -6,7 +6,7 @@ plugins {
     id 'androidx.navigation.safeargs'
 }
 
-def APP_VERSION = "2.1.11"
+def APP_VERSION = "2.1.12"
 
 android {
     compileSdkVersion 31
@@ -17,7 +17,7 @@ android {
         targetSdkVersion 31
         minSdkVersion 21
 
-        versionCode 92
+        versionCode 93
         versionName APP_VERSION
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -48,11 +48,9 @@ android {
     productFlavors {
         gms {
             dimension dimMobileServices
-            applicationId "com.sygic.driving.testapp"
         }
         hms {
             dimension dimMobileServices
-            applicationId "com.sygic.driving.testapp_hms"
         }
     }
 
