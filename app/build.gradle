@@ -9,12 +9,12 @@ plugins {
 def APP_VERSION = "2.1.12"
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion '31.0.0'
+    compileSdkVersion 33
+    buildToolsVersion '33.0.0'
 
     defaultConfig {
         applicationId "com.sygic.driving.testapp"
-        targetSdkVersion 31
+        targetSdkVersion 33
         minSdkVersion 21
 
         versionCode 93
@@ -117,7 +117,7 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.testfairy:testfairy-android-sdk:1.+@aar'
 
-    def hiltVersion = "2.38.1"
+    def hiltVersion = "2.44.2"
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
 }
