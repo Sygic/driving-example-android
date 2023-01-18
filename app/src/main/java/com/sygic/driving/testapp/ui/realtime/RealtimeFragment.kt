@@ -36,7 +36,13 @@ class RealtimeFragment : Fragment() {
 
     private lateinit var binding: FragmentRealtimeBinding
 
-    private val drivingPermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) listOf(
+    private val drivingPermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) listOf(
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACTIVITY_RECOGNITION,
+        Manifest.permission.POST_NOTIFICATIONS
+    )
+    else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) listOf(
         Manifest.permission.ACCESS_COARSE_LOCATION,
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACTIVITY_RECOGNITION
@@ -48,7 +54,8 @@ class RealtimeFragment : Fragment() {
 
     private val requestDrivingPermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-            // Driving library can work without permissions, so we ignore the result
+            // Driving library can run without permissions, so we ignore the result, but normally
+            // you need to ensure at least location permission in order to work properly.
         }
 
     private val requestBgLocationPermission =

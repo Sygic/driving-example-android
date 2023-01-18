@@ -20,7 +20,7 @@
 
     <!-- default values -->
     <bool name="default_automatic_trip_detection">true</bool>
-    <bool name="default_developer_mode">false</bool>
+    <bool name="default_developer_mode">true</bool>
     <bool name="default_motion_activity">true</bool>
     <integer name="default_disable_detection_battery_lower_than">0</integer>
     <bool name="default_disable_detection_power_saver">false</bool>
