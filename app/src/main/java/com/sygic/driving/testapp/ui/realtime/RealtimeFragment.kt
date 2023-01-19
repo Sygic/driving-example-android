@@ -108,9 +108,9 @@ class RealtimeFragment : Fragment() {
                     initState !is Driving.InitState.Initialized -> Color.GRAY
                     tripState.state == TripState.NotStarted -> Color.TRANSPARENT
                     else -> when (detectorState) {
-                        DetectorState.Disoriented -> Color.RED
-                        DetectorState.HasGravity -> Color.YELLOW
-                        DetectorState.Oriented -> Color.GREEN
+                        DetectorState.Disoriented -> Color.rgb(217, 127, 117)
+                        DetectorState.HasGravity -> Color.rgb(247, 245, 168)
+                        DetectorState.Oriented -> Color.rgb(122, 245, 122)
                     }
                 }
             }.collect { bgColor ->
