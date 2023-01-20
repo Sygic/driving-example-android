@@ -6,7 +6,7 @@ plugins {
     id 'androidx.navigation.safeargs'
 }
 
-def APP_VERSION = "2.2.3"
+def APP_VERSION = "2.2.4"
 
 android {
     compileSdkVersion 33
@@ -17,7 +17,7 @@ android {
         targetSdkVersion 33
         minSdkVersion 21
 
-        versionCode 95
+        versionCode 96
         versionName APP_VERSION
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -87,7 +87,7 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.gms:play-services-location:19.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'com.google.guava:guava:27.1-android'
     implementation 'androidx.preference:preference-ktx:1.1.1'
