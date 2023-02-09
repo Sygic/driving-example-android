@@ -10,13 +10,24 @@
     <string name="key_battery_optimization">batteryOptimization</string>
     <string name="key_app_version">version</string>
     <string name="key_user_id">user</string>
+    <string name="key_vehicle_type">vehicleType</string>
+    <string name="key_vehicle_type_car">car</string>
+    <string name="key_vehicle_type_truck">truck</string>
     <string name="key_end_trips_automatically">endTripsAutomatically</string>
     <string name="key_min_trip_duration">minimalTripDuration</string>
     <string name="key_min_trip_length">minimalTripLength</string>
-
     <string name="key_category_trip_detection">categoryTripDetection</string>
     <string name="key_category_trips">categoryTrips</string>
     <string name="key_category_general">categoryGeneral</string>
+
+    <string-array name="vehicle_type_keys">
+        <item>@string/key_vehicle_type_car</item>
+        <item>@string/key_vehicle_type_truck</item>
+    </string-array>
+    <string-array name="vehicle_type_values">
+        <item>@string/settings_vehicle_type_car</item>
+        <item>@string/settings_vehicle_type_truck</item>
+    </string-array>
 
     <!-- default values -->
     <bool name="default_automatic_trip_detection">true</bool>
@@ -28,5 +39,6 @@
     <bool name="default_end_trips_automatically">true</bool>
     <integer name="default_min_trip_duration">90</integer>
     <integer name="default_min_trip_length">300</integer>
+    <string name="default_vehicle_type">@string/key_vehicle_type_car</string>
 
 </resources>

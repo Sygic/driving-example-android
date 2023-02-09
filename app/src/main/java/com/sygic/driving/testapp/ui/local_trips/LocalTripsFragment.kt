@@ -78,6 +78,7 @@ class LocalTripsFragment : Fragment() {
                 is TripHeaderAdapter.TripAction.Selected -> viewModel.onTripSelected(action.id)
                 is TripHeaderAdapter.TripAction.Send -> viewModel.onTripSend(action.id)
                 is TripHeaderAdapter.TripAction.Simulate -> viewModel.onTripSimulate(action.id)
+                is TripHeaderAdapter.TripAction.SimulateFast -> viewModel.onTripSimulateFast(action.id)
             }.exhaustive
         }
     }

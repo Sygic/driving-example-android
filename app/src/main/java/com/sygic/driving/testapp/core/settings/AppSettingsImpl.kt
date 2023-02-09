@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import com.sygic.driving.VehicleType
 import com.sygic.driving.testapp.core.utils.BatteryOptimizationState
 import com.sygic.driving.testapp.core.utils.toBatteryOptimizationState
 import com.sygic.driving.testapp.core.utils.toInt
@@ -29,6 +30,7 @@ class AppSettingsImpl(context: Context): AppSettings(context) {
     private val prefEndTripsAutomatically = booleanPreferencesKey(keyEndTripsAutomatically)
     private val prefMinTripDuration = intPreferencesKey(keyMinTripDuration)
     private val prefMinTripLength = intPreferencesKey(keyMinTripLength)
+    private val prefVehicleType = stringPreferencesKey(keyVehicleType)
 
 
     override val userId: Flow<String> = dataStore.data.map { preferences ->
@@ -74,7 +76,10 @@ class AppSettingsImpl(context: Context): AppSettings(context) {
     override val appVersion: Flow<String> = dataStore.data.map { preferences ->
         preferences[prefAppVersion] ?: defaultAppVersion
     }
-        
+
+    override val vehicleType: Flow<VehicleType> = dataStore.data.map { preferences ->
+        (preferences[prefVehicleType] ?: defaultVehicleType).toVehicleType()
+    }
 
     override suspend fun setUserId(userId: String) {
         dataStore.edit { preferences ->
@@ -135,4 +140,16 @@ class AppSettingsImpl(context: Context): AppSettings(context) {
             preferences[prefMinTripLength] = minTripLengthMeters
         }
     }
+
+    override suspend fun setVehicleType(vehicleType: String) {
+        dataStore.edit { preferences ->
+            preferences[prefVehicleType] = vehicleType
+        }
+    }
+
+    private fun String.toVehicleType(): VehicleType =
+        when(this) {
+            keyVehicleTypeTruck -> VehicleType.Truck
+            else -> VehicleType.Car
+        }
 }

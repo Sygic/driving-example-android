@@ -72,6 +72,13 @@ class LocalTripsViewModel @Inject constructor(
         }
     }
 
+    fun onTripSimulateFast(tripId: String) {
+        viewModelScope.launch {
+            simulateTrip(tripId, playbackSpeed = 4.0f)
+            _uiEvents.send(UiEvent.PopBackStack)
+        }
+    }
+
     fun onTripSend(tripId: String) {
         viewModelScope.launch {
             val files = getTripDeveloperFiles(tripId)

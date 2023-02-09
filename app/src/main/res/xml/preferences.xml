@@ -78,6 +78,15 @@
             app:title="@string/settings_user_id"
             />
 
+        <DropDownPreference
+            app:key="@string/key_vehicle_type"
+            app:title="@string/settings_vehicle_type"
+            android:entryValues="@array/vehicle_type_keys"
+            android:entries="@array/vehicle_type_values"
+            android:defaultValue="@string/default_vehicle_type"
+            />
+
+
         <SwitchPreference
             app:key="@string/key_developer_mode"
             app:title="@string/settings_developer_mode"
@@ -87,6 +96,7 @@
             app:key="@string/key_app_version"
             app:title="@string/settings_app_version"
             />
+
 
     </PreferenceCategory>
 

@@ -154,9 +154,9 @@ class DrivingManager @Inject constructor(
             .build()
     }
 
-    private fun getVehicleSettings(): VehicleSettings {
+    private suspend fun getVehicleSettings(): VehicleSettings {
         return VehicleSettings.Builder()
-            .vehicleType(VehicleType.Car)
+            .vehicleType(appSettings.vehicleType.first())
             .maxSpeedKph(130)
             .build()
     }
@@ -201,6 +201,14 @@ class DrivingManager @Inject constructor(
                 }
         }
         jobs.add(configJob)
+
+        // update vehicle settings
+        val vehicleSettingsJob = scope.launch {
+            appSettings.vehicleType.collect {
+                drivingInstance.value?.vehicleSettings = getVehicleSettings()
+            }
+        }
+        jobs.add(vehicleSettingsJob)
 
         // change developer mode
         val developerModeJob = scope.launch {

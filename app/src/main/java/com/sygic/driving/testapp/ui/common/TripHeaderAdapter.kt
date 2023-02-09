@@ -94,6 +94,10 @@ class TripHeaderAdapter(
                     listener.onTripAction(TripAction.Simulate(tripId))
                     true
                 }
+                R.id.simulate_fast -> {
+                    listener.onTripAction(TripAction.SimulateFast(tripId))
+                    true
+                }
                 R.id.delete -> {
                     listener.onTripAction(TripAction.Delete(tripId))
                     true
@@ -106,6 +110,7 @@ class TripHeaderAdapter(
     sealed class TripAction {
         data class Selected(val id: String): TripAction()
         data class Simulate(val id: String): TripAction()
+        data class SimulateFast(val id: String): TripAction()
         data class Send(val id: String): TripAction()
         data class Delete(val id: String): TripAction()
     }

@@ -1,6 +1,7 @@
 package com.sygic.driving.testapp.core.settings
 
 import android.content.Context
+import com.sygic.driving.VehicleType
 import com.sygic.driving.testapp.BuildConfig
 import com.sygic.driving.testapp.R
 import com.sygic.driving.testapp.core.utils.BatteryOptimizationState
@@ -24,6 +25,7 @@ abstract class AppSettings(context: Context) {
     abstract val endTripsAutomatically: Flow<Boolean>
     abstract val minTripDurationSeconds: Flow<Int>
     abstract val minTripLengthMeters: Flow<Int>
+    abstract val vehicleType: Flow<VehicleType>
 
     abstract val appVersion: Flow<String>
     
@@ -37,6 +39,7 @@ abstract class AppSettings(context: Context) {
     abstract suspend fun setEndTripsAutomatically(endTripsAutomatically: Boolean)
     abstract suspend fun setMinTripDurationSeconds(minTripDurationSeconds: Int)
     abstract suspend fun setMinTripLengthMeters(minTripLengthMeters: Int)
+    abstract suspend fun setVehicleType(vehicleType: String)
 
     val keyAutomaticTripDetection =
         context.getString(R.string.key_automatic_trip_detection)
@@ -71,6 +74,15 @@ abstract class AppSettings(context: Context) {
     val keyMinTripLength =
         context.getString(R.string.key_min_trip_length)
 
+    val keyVehicleType =
+        context.getString(R.string.key_vehicle_type)
+
+    val keyVehicleTypeCar =
+        context.getString(R.string.key_vehicle_type_car)
+
+    val keyVehicleTypeTruck =
+        context.getString(R.string.key_vehicle_type_truck)
+
 
     protected val defaultAutomaticTripDetection =
         context.getBoolean(R.bool.default_automatic_trip_detection)
@@ -103,5 +115,7 @@ abstract class AppSettings(context: Context) {
     protected val defaultMinTripLength =
         context.getInteger(R.integer.default_min_trip_length)
 
+    protected val defaultVehicleType =
+        context.getString(R.string.default_vehicle_type)
 
 }

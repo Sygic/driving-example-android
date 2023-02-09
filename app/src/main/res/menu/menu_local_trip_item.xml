@@ -9,6 +9,10 @@
         android:title="@string/local_trip.simulate" />
 
     <item
+        android:id="@+id/simulate_fast"
+        android:title="@string/local_trip.simulate_fast" />
+
+    <item
         android:id="@+id/send"
         android:title="@string/local_trip.send" />
 

@@ -6,7 +6,7 @@ plugins {
     id 'androidx.navigation.safeargs'
 }
 
-def APP_VERSION = "2.2.4"
+def APP_VERSION = "2.2.6"
 
 android {
     compileSdkVersion 33
@@ -17,7 +17,7 @@ android {
         targetSdkVersion 33
         minSdkVersion 21
 
-        versionCode 96
+        versionCode 99
         versionName APP_VERSION
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

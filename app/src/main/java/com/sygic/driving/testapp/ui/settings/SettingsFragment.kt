@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.*
+import com.sygic.driving.VehicleType
 import com.sygic.driving.testapp.R
 import com.sygic.driving.testapp.core.settings.AppSettings
 import com.sygic.driving.testapp.core.utils.BatteryOptimizationState
@@ -215,6 +216,21 @@ class SettingsFragment: PreferenceFragmentCompat() {
                 }
         }
 
+        dropDownPref(appSettings.keyVehicleType)?.let { prefVehicleType ->
+            launchAndRepeatWithViewLifecycle {
+                appSettings.vehicleType.collect {
+                    prefVehicleType.summary = it.string()
+                }
+            }
+            prefVehicleType.onPreferenceChangeListener =
+                Preference.OnPreferenceChangeListener { _, newValue ->
+                    (newValue as? String)?.let {
+                        launch { appSettings.setVehicleType(it) }
+                    }
+                    true
+                }
+        }
+
         // app version
         pref(appSettings.keyAppVersion)?.let { prefAppVersion ->
             launchAndRepeatWithViewLifecycle {
@@ -230,9 +246,17 @@ class SettingsFragment: PreferenceFragmentCompat() {
         lifecycleScope.launch(block = block)
     }
 
+    private fun VehicleType.string(): String =
+        requireContext().getString(
+            when (this) {
+                VehicleType.Truck -> R.string.settings_vehicle_type_truck
+                else -> R.string.settings_vehicle_type_car
+            }
+        )
 }
 
 private fun PreferenceFragmentCompat.pref(key: String) = findPreference<Preference>(key)
 private fun PreferenceFragmentCompat.switchPref(key: String) = findPreference<SwitchPreference>(key)
 private fun PreferenceFragmentCompat.seekBarPref(key: String) = findPreference<SeekBarPreference>(key)
 private fun PreferenceFragmentCompat.editTextPref(key: String) = findPreference<EditTextPreference>(key)
+private fun PreferenceFragmentCompat.dropDownPref(key: String) = findPreference<DropDownPreference>(key)

@@ -69,6 +69,9 @@
     <string name="settings_end_trips_automatically_desc">If trip is started manually, can it be ended automatically?</string>
     <string name="settings_category_general">General</string>
     <string name="settings_user_id">User</string>
+    <string name="settings_vehicle_type">Vehicle type</string>
+    <string name="settings_vehicle_type_car">Car</string>
+    <string name="settings_vehicle_type_truck">Truck</string>
     <string name="settings_developer_mode">Developer mode</string>
     <string name="settings_app_version">App version (not lib version)</string>
     <string name="settings_battery_optimization_unknown">Unknown</string>
@@ -81,7 +84,8 @@
     <string name="local_trip.upload_error">Upload error(%1$d)</string>
     <string name="local_trip.upload_unknown">\?</string>
     <string name="local_trip.show_details">Show details</string>
-    <string name="local_trip.simulate">Simulate (4x)</string>
+    <string name="local_trip.simulate">Simulate</string>
+    <string name="local_trip.simulate_fast">Simulate (4x speed)</string>
     <string name="local_trip.delete">Delete</string>
     <string name="local_trip.send">Send trip data</string>
     <string name="local_trip.send_failed">Failed to get trip data</string>
