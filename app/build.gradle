@@ -6,7 +6,7 @@ plugins {
     id 'androidx.navigation.safeargs'
 }
 
-def APP_VERSION = "2.2.6"
+def APP_VERSION = "2.3.100"
 
 android {
     compileSdkVersion 33
@@ -17,7 +17,7 @@ android {
         targetSdkVersion 33
         minSdkVersion 21
 
-        versionCode 99
+        versionCode 100
         versionName APP_VERSION
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -75,7 +75,7 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.google.android.gms:play-services-maps:18.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     if (gradle.getDrivingLibPath().isEmpty()) {

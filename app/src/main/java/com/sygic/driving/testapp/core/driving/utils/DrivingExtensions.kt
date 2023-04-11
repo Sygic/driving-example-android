@@ -118,9 +118,19 @@ fun Driving.distanceDrivenFlow(): Flow<Double> = callbackFlow {
     awaitClose { removeEventListener(listener) }
 }
 
-fun Driving.passiveLocationFlow(): Flow<Location> = callbackFlow {
+fun Driving.systemLocationFlow(): Flow<Location> = callbackFlow {
     val listener = object: Driving.LocationListener {
         override fun onLocation(location: Location) {
+            trySend(location)
+        }
+    }
+    addLocationListener(listener)
+    awaitClose { removeLocationListener(listener) }
+}
+
+fun Driving.computedLocationFlow(): Flow<Location> = callbackFlow {
+    val listener = object: Driving.LocationListener {
+        override fun onComputedLocation(location: Location) {
             trySend(location)
         }
     }

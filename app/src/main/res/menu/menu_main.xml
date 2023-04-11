@@ -7,6 +7,11 @@
             android:title="@string/navi_realtime"/>
 
     <item
+            android:id="@+id/mapFragment"
+            android:icon="@drawable/ic_map"
+            android:title="@string/navi_map"/>
+
+    <item
             android:id="@+id/serverTripsFragment"
             android:icon="@drawable/ic_cloud"
             android:title="@string/navi_trips"/>
