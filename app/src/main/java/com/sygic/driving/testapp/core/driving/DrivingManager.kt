@@ -111,6 +111,18 @@ class DrivingManager @Inject constructor(
         driving.passiveLocationFlow()
     }.stateIn(scope, WHILE_SUBSCRIBED_WITH_TIMEOUT, Location(""))
 
+    val bluetoothConnected: StateFlow<Boolean> = drivingFlow { driving ->
+        driving.externalDeviceConnectionStateFlow()
+    }.stateIn(scope, WHILE_SUBSCRIBED_WITH_TIMEOUT, false)
+
+    val bluetoothDataTrafficEvent: SharedFlow<Unit> = drivingFlow { driving ->
+        driving.externalDeviceDataTrafficFlow()
+    }.shareIn(scope, WHILE_SUBSCRIBED_WITH_TIMEOUT, 0)
+
+    val bluetoothDeviceSpeed: SharedFlow<Float> = drivingFlow { driving ->
+        driving.externalDeviceSpeedFlow()
+    }.shareIn(scope, WHILE_SUBSCRIBED_WITH_TIMEOUT, 1)
+
     private suspend fun initialize(): Driving? {
 
         val initResult = Driving.initialize(getInitializer())
@@ -141,6 +153,7 @@ class DrivingManager @Inject constructor(
     }
 
     private suspend fun getConfiguration(): Configuration {
+        val btDongleAddress = appSettings.bluetoothDongleAddress.first().takeIf { it.isNotEmpty() }
         return Configuration.Builder()
             .sendOnMobileData(true)
             .disableTripDetectionInLowPowerMode(appSettings.disableDetectionInPowerSaver.first())
@@ -151,6 +164,7 @@ class DrivingManager @Inject constructor(
             .localTripsPolicy(LocalTripsPolicy.Enabled)
             .tripEndTimeout(TimeUnit.MINUTES.toSeconds(5).toInt())
             .drivingServerUrl(Constants.DRB_SERVER_DEVICE_URL)
+            .bluetoothDongleAddress(btDongleAddress)
             .build()
     }
 
@@ -193,7 +207,8 @@ class DrivingManager @Inject constructor(
                 appSettings.disableDetectionInPowerSaver,
                 appSettings.minTripDurationSeconds,
                 appSettings.minTripLengthMeters,
-                appSettings.enableMotionActivity
+                appSettings.enableMotionActivity,
+                appSettings.bluetoothDongleAddress
             ) { _ ->
             }
                 .collect {

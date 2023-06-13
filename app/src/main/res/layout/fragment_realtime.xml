@@ -18,6 +18,14 @@
         android:visibility="gone"
         tools:text="Driving not initialized" />
 
+    <ImageView
+        android:id="@+id/imgBluetoothIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_bluetooth_connected_24"
+        android:padding="20dp"
+        />
+
     <RelativeLayout
         android:id="@+id/warning"
         android:layout_width="match_parent"

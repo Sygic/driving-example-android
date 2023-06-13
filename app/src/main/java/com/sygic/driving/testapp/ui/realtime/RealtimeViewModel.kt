@@ -70,8 +70,8 @@ class RealtimeViewModel @Inject constructor(
     val harsh: Flow<DrivingTripEvent> =
         drivingManager.events.filter { it.type == TripEventType.Harsh }
 
-    val speed: Flow<Float> = drivingManager.passiveLocation
-        .map { it.speed }
+    val speed: Flow<Float> = drivingManager.bluetoothDeviceSpeed
+        //.map { it.speed }
 
     val tripStartTime: StateFlow<Date?> = drivingManager.tripState
         .map { it.startTime }
@@ -102,6 +102,9 @@ class RealtimeViewModel @Inject constructor(
     }
 
     val simulationRunning = drivingManager.simulationRunning
+
+    val bluetoothConnected = drivingManager.bluetoothConnected
+    val bluetoothDataTrafficEvent = drivingManager.bluetoothDataTrafficEvent
 
     fun onStartTrip() {
         viewModelScope.launch {

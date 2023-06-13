@@ -33,7 +33,11 @@
         android:id="@+id/settingsFragment"
         android:name="com.sygic.driving.testapp.ui.settings.SettingsFragment"
         android:label="SettingsFragment"
-        />
+        >
+        <action
+            android:id="@+id/action_settingsFragment_to_bluetoothDevicesFragment"
+            app:destination="@id/bluetoothDevicesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/localTripsFragment"
         android:name="com.sygic.driving.testapp.ui.local_trips.LocalTripsFragment"
@@ -55,4 +59,10 @@
             android:name="tripId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/bluetoothDevicesFragment"
+        android:name="com.sygic.driving.testapp.ui.settings.BluetoothDevicesFragment"
+        android:label="BluetoothDevicesFragment"
+        tools:layout="@layout/fragment_bluetooth_devices"
+        />
 </navigation>

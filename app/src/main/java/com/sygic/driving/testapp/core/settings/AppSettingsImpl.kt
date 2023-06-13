@@ -31,7 +31,8 @@ class AppSettingsImpl(context: Context): AppSettings(context) {
     private val prefMinTripDuration = intPreferencesKey(keyMinTripDuration)
     private val prefMinTripLength = intPreferencesKey(keyMinTripLength)
     private val prefVehicleType = stringPreferencesKey(keyVehicleType)
-
+    private val prefBluetoothDongleName = stringPreferencesKey(keyBluetoothDongleName)
+    private val prefBluetoothDongleAddress = stringPreferencesKey(keyBluetoothDongleAddress)
 
     override val userId: Flow<String> = dataStore.data.map { preferences ->
         preferences[prefUserId] ?: defaultUserId
@@ -79,6 +80,14 @@ class AppSettingsImpl(context: Context): AppSettings(context) {
 
     override val vehicleType: Flow<VehicleType> = dataStore.data.map { preferences ->
         (preferences[prefVehicleType] ?: defaultVehicleType).toVehicleType()
+    }
+
+    override val bluetoothDongleName: Flow<String> = dataStore.data.map { preferences ->
+        preferences[prefBluetoothDongleName] ?: defaultBluetoothDongleName
+    }
+
+    override val bluetoothDongleAddress: Flow<String> = dataStore.data.map { preferences ->
+        preferences[prefBluetoothDongleAddress] ?: defaultBluetoothDongleAddress
     }
 
     override suspend fun setUserId(userId: String) {
@@ -144,6 +153,18 @@ class AppSettingsImpl(context: Context): AppSettings(context) {
     override suspend fun setVehicleType(vehicleType: String) {
         dataStore.edit { preferences ->
             preferences[prefVehicleType] = vehicleType
+        }
+    }
+
+    override suspend fun setBluetoothDongleName(name: String) {
+        dataStore.edit { preferences ->
+            preferences[prefBluetoothDongleName] = name
+        }
+    }
+
+    override suspend fun setBluetoothDongleAddress(address: String) {
+        dataStore.edit { preferences ->
+            preferences[prefBluetoothDongleAddress] = address
         }
     }
 

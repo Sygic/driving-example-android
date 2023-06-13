@@ -40,3 +40,14 @@ fun Int.asImmutableFlag(): Int {
 fun Int.daysToMillis(): Long {
     return this * 24 * 60 * 60 * 1000L
 }
+
+fun Long.formatDurationHhMmSs(): String {
+    val h = this / 3600
+    val m = (this % 3600) / 60
+    val s = this % 60
+    return if (h > 0)
+        String.format("%d:%02d:%02d", h, m, s)
+    else
+        String.format("%d:%02d", m, s)
+}
+

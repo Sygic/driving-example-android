@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.sygic.driving.Driving
@@ -26,6 +27,7 @@ import com.sygic.driving.testapp.core.utils.*
 import com.sygic.driving.testapp.databinding.FragmentRealtimeBinding
 import com.sygic.driving.testapp.core.utils.UiEvent
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 
 
@@ -283,6 +285,19 @@ class RealtimeFragment : Fragment() {
                 }
             }
         }
+        launchAndRepeatWithViewLifecycle {
+            viewModel.bluetoothConnected.collect {
+                binding.imgBluetoothIndicator.isVisible = it
+            }
+        }
+        launchAndRepeatWithViewLifecycle {
+            viewModel.bluetoothDataTrafficEvent.collectLatest {
+                val originalColor = binding.imgBluetoothIndicator.colorFilter
+                binding.imgBluetoothIndicator.setColorFilter(Color.argb(255, 12, 240, 12))
+                delay(100)
+                binding.imgBluetoothIndicator.colorFilter = originalColor
+            }
+        }
     }
 
     override fun onResume() {
@@ -320,7 +335,7 @@ class RealtimeFragment : Fragment() {
 
     private fun showError(@StringRes resId: Int) {
         binding.error.apply {
-            text = requireContext().getStringFormat(
+            text = requireContext().getString(
                 R.string.realtime_error_driving_not_initialized, getString(resId)
             )
             visibility = View.VISIBLE

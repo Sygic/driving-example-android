@@ -143,3 +143,33 @@ suspend fun LocalTripsManager.getTripDetails(tripRecord: TripRecord): TripDetail
         }
     })
 }
+
+fun Driving.externalDeviceConnectionStateFlow(): Flow<Boolean> = callbackFlow {
+    val listener = object: Driving.ExternalDeviceListener {
+        override fun onConnectionStateChanged(isConnected: Boolean) {
+            trySend(isConnected)
+        }
+    }
+    addExternalDeviceListener(listener)
+    awaitClose { removeExternalDeviceListener(listener) }
+}
+
+fun Driving.externalDeviceDataTrafficFlow(): Flow<Unit> = callbackFlow {
+    val listener = object: Driving.ExternalDeviceListener {
+        override fun onDataTraffic() {
+            trySend(Unit)
+        }
+    }
+    addExternalDeviceListener(listener)
+    awaitClose { removeExternalDeviceListener(listener) }
+}
+
+fun Driving.externalDeviceSpeedFlow(): Flow<Float> = callbackFlow {
+    val listener = object: Driving.ExternalDeviceListener {
+        override fun onCanData(speed: Float) {
+            trySend(speed)
+        }
+    }
+    addExternalDeviceListener(listener)
+    awaitClose { removeExternalDeviceListener(listener) }
+}

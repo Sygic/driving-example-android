@@ -4,17 +4,22 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.*
+import androidx.preference.DropDownPreference
+import androidx.preference.EditTextPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SeekBarPreference
+import androidx.preference.SwitchPreference
 import com.sygic.driving.VehicleType
 import com.sygic.driving.testapp.R
 import com.sygic.driving.testapp.core.settings.AppSettings
 import com.sygic.driving.testapp.core.utils.BatteryOptimizationState
-import com.sygic.driving.testapp.core.utils.getStringFormat
 import com.sygic.driving.testapp.core.utils.launchAndRepeatWithViewLifecycle
 import com.sygic.driving.testapp.core.utils.openBatteryOptimizationSettings
+import com.sygic.driving.testapp.ui.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -87,7 +92,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
             launchAndRepeatWithViewLifecycle {
                 appSettings.disableDetectionIfBatteryLowerThan.collect {
                     prefBatteryThreshold.summary =
-                        requireContext().getStringFormat(R.string.settings_battery_threshold_desc, it)
+                        requireContext().getString(R.string.settings_battery_threshold_desc, it)
                 }
             }
             prefBatteryThreshold.onPreferenceChangeListener =
@@ -171,7 +176,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
             launchAndRepeatWithViewLifecycle {
                 appSettings.minTripLengthMeters.collect {
                     prefMinTripLength.summary =
-                        requireContext().getStringFormat(R.string.settings_minimal_trip_length_desc, it)
+                        requireContext().getString(R.string.settings_minimal_trip_length_desc, it)
                 }
             }
 
@@ -188,7 +193,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
             launchAndRepeatWithViewLifecycle {
                 appSettings.minTripDurationSeconds.collect {
                     prefMinTripDuration.summary =
-                        requireContext().getStringFormat(R.string.settings_minimal_trip_duration_desc, it)
+                        requireContext().getString(R.string.settings_minimal_trip_duration_desc, it)
                 }
             }
 
@@ -229,6 +234,25 @@ class SettingsFragment: PreferenceFragmentCompat() {
                     }
                     true
                 }
+        }
+
+        // bluetooth dongle
+        pref(appSettings.keyBluetoothDongleName)?.let { prefBtDongle ->
+            launchAndRepeatWithViewLifecycle {
+                combine(
+                    appSettings.bluetoothDongleName,
+                    appSettings.bluetoothDongleAddress
+                ) { name, address ->
+                    if (address.isEmpty()) ""
+                    else "$name ($address)"
+                }.collect {
+                    prefBtDongle.summary = it
+                }
+            }
+            prefBtDongle.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+                requireActivity().findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToBluetoothDevicesFragment())
+                true
+            }
         }
 
         // app version

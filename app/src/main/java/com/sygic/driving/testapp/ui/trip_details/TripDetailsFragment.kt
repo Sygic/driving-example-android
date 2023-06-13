@@ -12,7 +12,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.sygic.driving.data.TripEventType
 import com.sygic.driving.testapp.R
-import com.sygic.driving.testapp.core.utils.*
+import com.sygic.driving.testapp.core.utils.formatDate
+import com.sygic.driving.testapp.core.utils.launchAndRepeatWithViewLifecycle
 import com.sygic.driving.testapp.databinding.FragmentTripDetailsBinding
 import com.sygic.driving.testapp.domain.driving.model.DrivingTripDetails
 import com.sygic.driving.testapp.domain.driving.model.DrivingTripEvent
@@ -22,9 +23,8 @@ import com.sygic.driving.testapp.ui.trip_details.utils.toGoogleMapMarker
 import com.sygic.driving.testapp.ui.trip_details.utils.toGoogleMapPolyline
 import com.sygic.driving.testapp.ui.trip_details.utils.toListOfProperties
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
-import java.util.*
+import java.util.Date
 
 @AndroidEntryPoint
 class TripDetailsFragment : Fragment() {
@@ -125,7 +125,7 @@ class TripDetailsFragment : Fragment() {
     }
 
     private fun Date.toTripName(): String {
-        return requireContext().getStringFormat(R.string.trip_details_trip_name, formatDate())
+        return requireContext().getString(R.string.trip_details_trip_name, formatDate())
     }
 
     private fun showSegmentsOnMap(segments: List<DrivingTripSegment>) {

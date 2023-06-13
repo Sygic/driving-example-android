@@ -14,7 +14,7 @@ fun DrivingTripDetails.toListOfProperties(ctx: Context): List<NameValueProperty>
     val result = mutableListOf(
         Pair(
             ctx.getString(R.string.trip_details_length),
-            ctx.getStringFormat(R.string.value_of_km, lengthMeters.metersToKm().format(3))
+            ctx.getString(R.string.value_of_km, lengthMeters.metersToKm().format(3))
         ),
         Pair(
             ctx.getString(R.string.trip_details_duration),
@@ -66,7 +66,7 @@ fun DrivingTripEvent.toListOfProperties(ctx: Context): List<NameValueProperty> {
         ),
         Pair(
             ctx.getString(R.string.event_details_duration),
-            ctx.getStringFormat(R.string.value_of_sec, duration.format(3))
+            ctx.getString(R.string.value_of_sec, duration.format(3))
         )
     )
 
@@ -74,7 +74,7 @@ fun DrivingTripEvent.toListOfProperties(ctx: Context): List<NameValueProperty> {
         properties.add(
             Pair(
                 ctx.getString(R.string.event_details_peak),
-                ctx.getStringFormat(R.string.value_of_g, it.format(3))
+                ctx.getString(R.string.value_of_g, it.format(3))
             )
         )
     }
@@ -108,6 +108,6 @@ fun TripUploadStatus.toString(context: Context): String {
         is TripUploadStatus.Uploaded -> context.getString(R.string.local_trip_uploaded)
         is TripUploadStatus.NotUploaded -> context.getString(R.string.local_trip_not_uploaded)
         is TripUploadStatus.UploadFailed ->
-            context.getStringFormat(R.string.local_trip_upload_error, lastUploadError)
+            context.getString(R.string.local_trip_upload_error, lastUploadError)
     }
 }

@@ -19,6 +19,8 @@
     <string name="key_category_trip_detection">categoryTripDetection</string>
     <string name="key_category_trips">categoryTrips</string>
     <string name="key_category_general">categoryGeneral</string>
+    <string name="key_bluetooth_dongle_name">bluetoothDongleName</string>
+    <string name="key_bluetooth_dongle_address">bluetoothDongleAddress</string>
 
     <string-array name="vehicle_type_keys">
         <item>@string/key_vehicle_type_car</item>
@@ -40,5 +42,7 @@
     <integer name="default_min_trip_duration">90</integer>
     <integer name="default_min_trip_length">300</integer>
     <string name="default_vehicle_type">@string/key_vehicle_type_car</string>
+    <string name="default_bluetooth_dongle_name" />
+    <string name="default_bluetooth_dongle_address" />
 
 </resources>

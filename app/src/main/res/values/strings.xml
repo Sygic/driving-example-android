@@ -73,11 +73,14 @@
     <string name="settings_vehicle_type_car">Car</string>
     <string name="settings_vehicle_type_truck">Truck</string>
     <string name="settings_developer_mode">Developer mode</string>
+    <string name="settings_bluetooth_dongle">Bluetooth dongle</string>
     <string name="settings_app_version">App version (not lib version)</string>
     <string name="settings_battery_optimization_unknown">Unknown</string>
     <string name="settings_battery_optimization_enabled">Enabled! Tap to disable</string>
     <string name="settings_battery_optimization_disabled">Disabled</string>
     <string name="settings_battery_optimization_dialog_open_failed">Failed to open settings</string>
+    <string name="settings_bluetooth_select_device">Select device to connect</string>
+    <string name="settings_bluetooth_invalid_device">Selected device is not valid.</string>
 
     <string name="local_trip.uploaded">Uploaded</string>
     <string name="local_trip.not_uploaded">Uploading</string>
@@ -117,5 +120,6 @@
     <string name="trip_event.name.speeding">Speeding</string>
     <string name="trip_event.name.pothole">Pothole</string>
     <string name="trip_event.name.harsh">Harsh</string>
+    <string name="settings_bluetooth_permission_warning">Bluetooth permission missing</string>
 
 </resources>

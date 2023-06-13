@@ -79,17 +79,26 @@
             android:id="@+id/btnStopSimulation"
         />
 
+    <ImageView
+        android:id="@+id/imgBluetoothIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_bluetooth_connected_24"
+        android:layout_below="@+id/warning"
+        android:padding="20dp"
+        />
+
     <TextView
         android:id="@+id/tvIsInTrip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/warning"
-        android:layout_alignParentStart="true"
         android:layout_marginStart="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginBottom="@dimen/default_margin"
         android:textSize="20sp"
+        android:layout_centerHorizontal="true"
         tools:text="IS IN TRIP" />
 
     <TableLayout
