@@ -7,4 +7,6 @@ def drivingLibPath = gradle.getDrivingLibPath()
 if (!drivingLibPath.isEmpty()) {
     include ":driving-lib"
     project(":driving-lib").projectDir = file(drivingLibPath)
+    include ":driving-lib-ktx"
+    project(":driving-lib-ktx").projectDir = file(drivingLibPath + "-ktx")
 }
