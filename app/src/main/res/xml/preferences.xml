@@ -93,6 +93,11 @@
             app:defaultValue="@bool/default_developer_mode" />
 
         <Preference
+            app:key="@string/key_send_logs"
+            app:title="@string/settings_send_log"
+            />
+
+        <Preference
             app:key="@string/key_app_version"
             app:title="@string/settings_app_version"
             />

@@ -62,6 +62,9 @@ abstract class AppSettings(context: Context) {
     val keyAppVersion =
         context.getString(R.string.key_app_version)
 
+    val keySendLogs =
+        context.getString(R.string.key_send_logs)
+
     val keyUserId =
         context.getString(R.string.key_user_id)
 

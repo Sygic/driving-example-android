@@ -1,5 +1,6 @@
 package com.sygic.driving.testapp.ui.settings
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,13 +10,17 @@ import com.sygic.driving.VehicleType
 import com.sygic.driving.testapp.R
 import com.sygic.driving.testapp.core.settings.AppSettings
 import com.sygic.driving.testapp.core.utils.BatteryOptimizationState
+import com.sygic.driving.testapp.core.utils.getDeviceName
 import com.sygic.driving.testapp.core.utils.getStringFormat
 import com.sygic.driving.testapp.core.utils.launchAndRepeatWithViewLifecycle
 import com.sygic.driving.testapp.core.utils.openBatteryOptimizationSettings
+import com.sygic.driving.testapp.core.utils.shareFile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -231,6 +236,16 @@ class SettingsFragment: PreferenceFragmentCompat() {
                 }
         }
 
+        // send logs
+        pref(appSettings.keySendLogs)?.let { pref ->
+            pref.setOnPreferenceClickListener {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    shareDrivingLog()
+                }
+                true
+            }
+        }
+
         // app version
         pref(appSettings.keyAppVersion)?.let { prefAppVersion ->
             launchAndRepeatWithViewLifecycle {
@@ -240,6 +255,45 @@ class SettingsFragment: PreferenceFragmentCompat() {
             }
         }
 
+    }
+
+    private suspend fun shareDrivingLog() {
+        val drivingDir = File(requireContext().getExternalFilesDir(null), "Driving")
+        val logFile = File(drivingDir, "androidLog.txt")
+        if(logFile.exists()) {
+            requireContext().shareFile(
+                logFile,
+                getString(R.string.settings_send_log_message_subject),
+                getShareDrivingLogBody()
+            )
+        }
+    }
+
+    private suspend fun getShareDrivingLogBody(): String {
+        with(StringBuilder()) {
+            // user id
+            append(getString(R.string.settings_send_log_message_body_user_id))
+            append(" ")
+            append(appSettings.userId.first())
+            append("\n")
+            // app version
+            append(getString(R.string.settings_send_log_message_body_app_version))
+            append(" ")
+            append(appSettings.appVersion.first())
+            append("\n")
+            // android version
+            append(getString(R.string.settings_send_log_message_body_android_version))
+            append(" ")
+            append(Build.VERSION.SDK_INT)
+            append("\n")
+            // device name
+            append(getString(R.string.settings_send_log_message_body_device_name))
+            append(" ")
+            append(getDeviceName())
+            append("\n")
+
+            return this.toString()
+        }
     }
 
     private fun launch(block: suspend CoroutineScope.() -> Unit) {

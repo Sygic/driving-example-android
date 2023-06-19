@@ -8,6 +8,7 @@
     <string name="key_disable_detection_battery_lower_than">disableTripDetectionIfBatteryLowerThan</string>
     <string name="key_disable_detection_power_saver">disableTripDetectionInPowerSaverMode</string>
     <string name="key_battery_optimization">batteryOptimization</string>
+    <string name="key_send_logs">send_logs</string>
     <string name="key_app_version">version</string>
     <string name="key_user_id">user</string>
     <string name="key_vehicle_type">vehicleType</string>
