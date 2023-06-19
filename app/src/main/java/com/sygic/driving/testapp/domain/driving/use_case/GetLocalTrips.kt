@@ -14,6 +14,7 @@ class GetLocalTrips @Inject constructor() {
         emit(Resource.Loading())
         val tripHeaders = driving.localTripsManager.getTripHeaders()
             .map { it.toDrivingTripHeader() }
+            .sortedByDescending { it.startTime }
         emit(Resource.Success(tripHeaders))
     }
 }
