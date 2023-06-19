@@ -49,6 +49,7 @@ abstract class AppSettings(context: Context) {
     val keyBatteryOptimization = context.getString(R.string.key_battery_optimization)
     val keyCarVin = context.getString(R.string.key_car_vin)
     val keyAppVersion = context.getString(R.string.key_app_version)
+    val keySendLogs = context.getString(R.string.key_send_logs)
     val keyUserId = context.getString(R.string.key_user_id)
     val keyEndTripsAutomatically = context.getString(R.string.key_end_trips_automatically)
     val keyMinTripDuration = context.getString(R.string.key_min_trip_duration)
@@ -62,9 +63,6 @@ abstract class AppSettings(context: Context) {
     protected val defaultAutomaticTripDetection = context.getBoolean(R.bool.default_automatic_trip_detection)
     protected val defaultDeveloperMode = context.getBoolean(R.bool.default_developer_mode)
     protected val defaultMotionActivity = context.getBoolean(R.bool.default_motion_activity)
-    protected val defaultDisableDetectionBatteryLowerThan = context.getInteger(R.integer.default_disable_detection_battery_lower_than)
-    protected val defaultDisableDetectionInPowerSaver = context.getBoolean(R.bool.default_disable_detection_power_saver)
-    protected val defaultBatteryOptimization = context.getInteger(R.integer.default_battery_optimization)
     protected val defaultAppVersion = BuildConfig.APP_VERSION
     protected val defaultUserId = context.getAndroidId()
     protected val defaultEndTripsAutomatically = context.getBoolean(R.bool.default_end_trips_automatically)

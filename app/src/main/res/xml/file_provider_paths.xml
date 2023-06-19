@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
+    <files-path name="Driving" path="." />
+    <external-files-path name="Driving" path="." />
     <files-path name="native" path="Driving/" />
     <external-files-path name="native" path="Driving/" />
 </paths>

@@ -83,6 +83,12 @@
     <string name="settings_battery_optimization_dialog_open_failed">Failed to open settings</string>
     <string name="settings_bluetooth_select_device">Select device to connect</string>
     <string name="settings_bluetooth_invalid_device">Selected device is not valid.</string>
+    <string name="settings_send_log">Send logs</string>
+    <string name="settings_send_log_message_subject">Driving logs</string>
+    <string name="settings_send_log_message_body_user_id">User ID:</string>
+    <string name="settings_send_log_message_body_device_name">Device name:</string>
+    <string name="settings_send_log_message_body_app_version">App version:</string>
+    <string name="settings_send_log_message_body_android_version">Android version:</string>
 
     <string name="local_trip.uploaded">Uploaded</string>
     <string name="local_trip.not_uploaded">Uploading</string>
