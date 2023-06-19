@@ -39,7 +39,8 @@
     <string name="realtime_distance_driven">Distance (km)</string>
     <string name="realtime_trip_start">Trip start</string>
     <string name="realtime_trip_duration">Trip duration</string>
-    <string name="realtime_speed">Speed (km/h)</string>
+    <string name="realtime_speed">Speed GPS|BT</string>
+    <string name="realtime_rpm">RPM</string>
     <string name="realtime_trip_discarded_distance">Trip discarded: distance too short</string>
     <string name="realtime_trip_discarded_duration">Trip discarded: duration too short</string>
     <string name="realtime_bg_permission_dialog_title">Background location</string>
@@ -74,6 +75,7 @@
     <string name="settings_vehicle_type_truck">Truck</string>
     <string name="settings_developer_mode">Developer mode</string>
     <string name="settings_bluetooth_dongle">Bluetooth dongle</string>
+    <string name="settings_car_vin">VIN</string>
     <string name="settings_app_version">App version (not lib version)</string>
     <string name="settings_battery_optimization_unknown">Unknown</string>
     <string name="settings_battery_optimization_enabled">Enabled! Tap to disable</string>
@@ -121,5 +123,9 @@
     <string name="trip_event.name.pothole">Pothole</string>
     <string name="trip_event.name.harsh">Harsh</string>
     <string name="settings_bluetooth_permission_warning">Bluetooth permission missing</string>
+
+    <string name="map.show_locations">Show GPS positions</string>
+    <string name="map.show_system_locations">System</string>
+    <string name="map.show_computed_locations">Bluetooth</string>
 
 </resources>

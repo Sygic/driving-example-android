@@ -47,6 +47,7 @@ abstract class AppSettings(context: Context) {
     val keyDisableDetectionBatteryLowerThan = context.getString(R.string.key_disable_detection_battery_lower_than)
     val keyDisableDetectionInPowerSaver = context.getString(R.string.key_disable_detection_power_saver)
     val keyBatteryOptimization = context.getString(R.string.key_battery_optimization)
+    val keyCarVin = context.getString(R.string.key_car_vin)
     val keyAppVersion = context.getString(R.string.key_app_version)
     val keyUserId = context.getString(R.string.key_user_id)
     val keyEndTripsAutomatically = context.getString(R.string.key_end_trips_automatically)

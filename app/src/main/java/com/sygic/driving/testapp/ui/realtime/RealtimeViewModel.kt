@@ -8,19 +8,21 @@ import com.sygic.driving.data.TripEventType
 import com.sygic.driving.data.TripState
 import com.sygic.driving.testapp.*
 import com.sygic.driving.testapp.core.driving.DrivingManager
-import com.sygic.driving.testapp.domain.driving.model.DrivingTripEvent
 import com.sygic.driving.testapp.core.settings.AppSettings
+import com.sygic.driving.testapp.core.utils.UiEvent
 import com.sygic.driving.testapp.core.utils.WHILE_SUBSCRIBED_WITH_TIMEOUT
 import com.sygic.driving.testapp.core.utils.millisToSeconds
+import com.sygic.driving.testapp.core.utils.mpsToKph
+import com.sygic.driving.testapp.domain.driving.model.DrivingTripEvent
 import com.sygic.driving.testapp.domain.driving.use_case.EndTrip
 import com.sygic.driving.testapp.domain.driving.use_case.StartTrip
-import com.sygic.driving.testapp.core.utils.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
+import kotlin.math.round
 
 @HiltViewModel
 class RealtimeViewModel @Inject constructor(
@@ -70,8 +72,22 @@ class RealtimeViewModel @Inject constructor(
     val harsh: Flow<DrivingTripEvent> =
         drivingManager.events.filter { it.type == TripEventType.Harsh }
 
-    val speed: Flow<Float> = drivingManager.bluetoothDeviceSpeed
-        //.map { it.speed }
+    val speed: Flow<String> = combine(
+        drivingManager.systemLocation
+            .mapNotNull { it?.speed ?: 0f }
+            .onStart { emit(0f) },
+        drivingManager.canDriveData
+            .map { it.speed }
+            .onStart { emit(0f) }
+    ) { gpsSpeed, btSpeed ->
+        val fixedGpsSpeed = round(if (gpsSpeed < 0f) 0f else gpsSpeed.mpsToKph()).toInt()
+        val fixedBtSpeed = round(if (btSpeed < 0f) 0f else btSpeed).toInt()
+        "$fixedGpsSpeed | $fixedBtSpeed"
+    }
+
+    val rpm: Flow<Int> = drivingManager.canDriveData
+        .map { it.rpm }
+        .onStart { emit(0) }
 
     val tripStartTime: StateFlow<Date?> = drivingManager.tripState
         .map { it.startTime }

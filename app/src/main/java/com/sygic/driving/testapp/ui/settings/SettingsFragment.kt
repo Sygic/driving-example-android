@@ -3,6 +3,7 @@ package com.sygic.driving.testapp.ui.settings
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.DropDownPreference
 import androidx.preference.EditTextPreference
@@ -19,12 +20,15 @@ import com.sygic.driving.testapp.core.utils.openBatteryOptimizationSettings
 import com.sygic.driving.testapp.ui.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsFragment: PreferenceFragmentCompat() {
+
+    private val viewModel by viewModels<SettingsViewModel>()
 
     @Inject
     lateinit var appSettings: AppSettings
@@ -252,6 +256,16 @@ class SettingsFragment: PreferenceFragmentCompat() {
             prefBtDongle.onPreferenceClickListener = Preference.OnPreferenceClickListener {
                 requireActivity().findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToBluetoothDevicesFragment())
                 true
+            }
+        }
+
+        // car vin
+        pref(appSettings.keyCarVin)?.let { prefCarVin ->
+            launchAndRepeatWithViewLifecycle {
+                viewModel.vin.collect {
+                    prefCarVin.isVisible = it != null
+                    prefCarVin.summary = it
+                }
             }
         }
 

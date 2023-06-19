@@ -83,6 +83,7 @@ class RealtimeFragment : Fragment() {
             liveStartTime.setDescription(R.string.realtime_start_time)
             liveSpeed.setDescription(R.string.realtime_speed)
             liveDuration.setDescription(R.string.realtime_trip_duration)
+            liveRpm.setDescription(R.string.realtime_rpm)
 
             btnGrant.setOnClickListener { requestBackgroundLocationPermission() }
         }
@@ -219,10 +220,8 @@ class RealtimeFragment : Fragment() {
         }
 
         launchAndRepeatWithViewLifecycle {
-            viewModel.speed.map { value ->
-                if (value < 0.0f) 0.0f else value.mpsToKph()
-            }.collect { speed ->
-                binding.liveSpeed.value = speed.toInt().toString()
+            viewModel.speed.collect {
+                binding.liveSpeed.value = it
             }
         }
 
@@ -267,6 +266,13 @@ class RealtimeFragment : Fragment() {
                 }
         }
 
+        // rpm
+        launchAndRepeatWithViewLifecycle {
+            viewModel.rpm.collect {
+                binding.liveRpm.value = it.toString()
+            }
+        }
+
         // is simulation running
         launchAndRepeatWithViewLifecycle {
             viewModel.simulationRunning.collect { isSimulationRunning ->
@@ -292,10 +298,9 @@ class RealtimeFragment : Fragment() {
         }
         launchAndRepeatWithViewLifecycle {
             viewModel.bluetoothDataTrafficEvent.collectLatest {
-                val originalColor = binding.imgBluetoothIndicator.colorFilter
-                binding.imgBluetoothIndicator.setColorFilter(Color.argb(255, 12, 240, 12))
+                binding.imgBluetoothIndicator.alpha = 1f
                 delay(100)
-                binding.imgBluetoothIndicator.colorFilter = originalColor
+                binding.imgBluetoothIndicator.alpha = 0.3f
             }
         }
     }

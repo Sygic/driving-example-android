@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_bluetooth_connected_24"
         android:padding="20dp"
+        android:alpha="0.3"
         />
 
     <RelativeLayout
@@ -114,14 +115,14 @@
 
         <TableRow>
 
-            <com.sygic.driving.testapp.core.ui_components.LiveValueView
+            <com.sygic.driving.testapp.ui.common.LiveValueView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/liveStartTime"
                     android:layout_gravity="center_horizontal"
                     />
 
-            <com.sygic.driving.testapp.core.ui_components.LiveValueView
+            <com.sygic.driving.testapp.ui.common.LiveValueView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/liveDistance"
@@ -130,7 +131,7 @@
                     />
 
 
-            <com.sygic.driving.testapp.core.ui_components.LiveValueView
+            <com.sygic.driving.testapp.ui.common.LiveValueView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/liveDuration"
@@ -142,7 +143,7 @@
 
         <TableRow>
 
-            <com.sygic.driving.testapp.core.ui_components.LiveValueView
+            <com.sygic.driving.testapp.ui.common.LiveValueView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/liveSpeed"
@@ -150,12 +151,20 @@
                 custom:description="Speed"
                 />
 
-            <com.sygic.driving.testapp.core.ui_components.LiveValueView
+            <com.sygic.driving.testapp.ui.common.LiveValueView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/liveAltitude"
                 android:layout_gravity="center_horizontal"
                 custom:description="Altitude"
+                />
+
+            <com.sygic.driving.testapp.ui.common.LiveValueView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/liveRpm"
+                android:layout_gravity="center_horizontal"
+                custom:description="RPM"
                 />
 
         </TableRow>

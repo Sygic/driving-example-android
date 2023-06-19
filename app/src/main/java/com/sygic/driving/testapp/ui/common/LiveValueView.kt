@@ -1,4 +1,4 @@
-package com.sygic.driving.testapp.core.ui_components
+package com.sygic.driving.testapp.ui.common
 
 import android.content.Context
 import android.util.AttributeSet

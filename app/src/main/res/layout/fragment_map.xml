@@ -1,29 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".ui.MainActivity"
->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <fragment
-            android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <FrameLayout
+        android:id="@+id/mapContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <fragment
+            android:id="@+id/fragmentMap"
             android:name="com.google.android.gms.maps.SupportMapFragment"
-            tools:context=".ui.MainActivity"
-    />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/tvEventsCount"
-              android:textSize="18sp"
-              android:layout_margin="@dimen/default_margin"
-              android:padding="@dimen/text_margin"
-              android:background="#ffffff"
-              android:layout_gravity="bottom|center_horizontal"
-              android:visibility="gone"
-              tools:text="A:2  B:1  C:4  D:0  H:1"
-    />
+    </FrameLayout>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corners"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:elevation="2dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/map.show_locations"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:paddingBottom="4dp"
+            />
+
+        <CheckBox
+            android:id="@+id/checkSystemLocations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/map.show_system_locations"
+            />
+
+        <CheckBox
+            android:id="@+id/checkComputedLocations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/map.show_computed_locations"
+            />
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFixGps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="24dp"
+        android:src="@drawable/ic_gps_not_fixed"
+        android:contentDescription="Fix GPS"
+        tools:ignore="HardcodedText" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingBottom="32dp"
+        android:paddingHorizontal="16dp"
+        >
+
+        <ImageView
+            android:id="@+id/imgTripRunning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_car" />
+
+        <ImageView
+            android:id="@+id/imgSimulationRunning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play"
+            android:tint="?attr/colorSuccess"
+            />
+
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

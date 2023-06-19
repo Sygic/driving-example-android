@@ -130,14 +130,6 @@ class BluetoothDevicesFragment: Fragment() {
                     viewModel.onBluetoothDeviceDetected(it)
                 }
             }
-
-            override fun onBatchScanResults(results: MutableList<ScanResult>?) {
-                super.onBatchScanResults(results)
-            }
-
-            override fun onScanFailed(errorCode: Int) {
-                super.onScanFailed(errorCode)
-            }
         }
         try {
             viewModel.onStartBluetoothScan()
@@ -147,7 +139,6 @@ class BluetoothDevicesFragment: Fragment() {
                 .build()
 
             val filter = ScanFilter.Builder()
-                //.setDeviceAddress("C1:D7:95:05:2C:DF")
                 .build()
 
             bluetoothAdapter.bluetoothLeScanner.startScan(listOf(filter), settings, scanCallback)

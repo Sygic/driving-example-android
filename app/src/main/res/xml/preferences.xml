@@ -99,6 +99,12 @@
             />
 
         <Preference
+            app:key="@string/key_car_vin"
+            app:title="@string/settings_car_vin"
+            app:isPreferenceVisible="false"
+            />
+
+        <Preference
             app:key="@string/key_app_version"
             app:title="@string/settings_app_version"
             />

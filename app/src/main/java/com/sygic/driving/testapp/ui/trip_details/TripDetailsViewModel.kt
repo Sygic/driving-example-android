@@ -60,11 +60,11 @@ class TripDetailsViewModel @Inject constructor(
 
 
     fun onMapReady() {
-        viewModelScope.launch { googleMapReady.emit(true) }
+        googleMapReady.value = true
     }
 
     fun onMapDestroyed() {
-        viewModelScope.launch { googleMapReady.emit(false) }
+        googleMapReady.value = false
     }
 
     private val _eventClicked: MutableStateFlow<DrivingTripEvent?> = MutableStateFlow(null)
