@@ -19,11 +19,13 @@ import com.sygic.driving.testapp.core.utils.BatteryOptimizationState
 import com.sygic.driving.testapp.core.utils.getDeviceName
 import com.sygic.driving.testapp.core.utils.launchAndRepeatWithViewLifecycle
 import com.sygic.driving.testapp.core.utils.openBatteryOptimizationSettings
+import com.sygic.driving.testapp.core.utils.shareFile
 import com.sygic.driving.testapp.ui.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject

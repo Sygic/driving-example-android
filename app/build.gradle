@@ -6,7 +6,7 @@ plugins {
     id 'androidx.navigation.safeargs'
 }
 
-def VERSION_CODE = 105
+def VERSION_CODE = 106
 def APP_VERSION = "2.4.$VERSION_CODE"
 
 android {

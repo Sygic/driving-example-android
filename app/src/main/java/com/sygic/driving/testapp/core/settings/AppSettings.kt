@@ -64,6 +64,9 @@ abstract class AppSettings(context: Context) {
     protected val defaultDeveloperMode = context.getBoolean(R.bool.default_developer_mode)
     protected val defaultMotionActivity = context.getBoolean(R.bool.default_motion_activity)
     protected val defaultAppVersion = BuildConfig.APP_VERSION
+    protected val defaultDisableDetectionBatteryLowerThan = context.getInteger(R.integer.default_disable_detection_battery_lower_than)
+    protected val defaultDisableDetectionInPowerSaver = context.getBoolean(R.bool.default_disable_detection_power_saver)
+    protected val defaultBatteryOptimization = context.getInteger(R.integer.default_battery_optimization)
     protected val defaultUserId = context.getAndroidId()
     protected val defaultEndTripsAutomatically = context.getBoolean(R.bool.default_end_trips_automatically)
     protected val defaultMinTripDuration = context.getInteger(R.integer.default_min_trip_duration)
