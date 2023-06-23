@@ -4,22 +4,23 @@ import android.location.Location
 import com.sygic.driving.Driving
 import com.sygic.driving.TripDiscardReason
 import com.sygic.driving.core.external_device.CanDriveData
-import com.sygic.driving.core.external_device.ExternalDeviceFeature
 import com.sygic.driving.data.DetectorState
 import com.sygic.driving.data.TripEvent
 import com.sygic.driving.data.TripState
 import com.sygic.driving.testapp.domain.driving.model.DrivingTripEvent
 import com.sygic.driving.testapp.domain.driving.model.DrivingTripState
 import com.sygic.driving.testapp.domain.driving.model.toDrivingTripEvent
-import com.sygic.driving.trips.*
+import com.sygic.driving.trips.LocalTripsManager
+import com.sygic.driving.trips.TripDetails
+import com.sygic.driving.trips.TripDetailsCallback
+import com.sygic.driving.trips.TripHeader
+import com.sygic.driving.trips.TripHeadersCallback
+import com.sygic.driving.trips.TripRecord
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
-import java.util.*
-import java.util.concurrent.TimeUnit
+import java.util.Date
 
 fun Driving.angleFlow(): Flow<Double> = callbackFlow {
     val listener = object : Driving.EventListener {
@@ -143,17 +144,6 @@ fun Driving.computedLocationFlow(): Flow<Location> = callbackFlow {
     awaitClose { removeLocationListener(listener) }
 }
 
-// TODO namapovat na GPS z BT
-fun Driving.computedLocationFlow(): Flow<Location> = emptyFlow()
-//    callbackFlow {
-//    val listener = object: Driving.LocationListener {
-//        override fun onComputedLocation(location: Location) {
-//            trySend(location)
-//        }
-//    }
-//    addLocationListener(listener)
-//    awaitClose { removeLocationListener(listener) }
-//}
 
 suspend fun LocalTripsManager.getTripHeaders(): List<TripHeader> = suspendCancellableCoroutine { continuation ->
     getTripHeaders(object : TripHeadersCallback {
