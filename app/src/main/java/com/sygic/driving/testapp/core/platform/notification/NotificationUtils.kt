@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
+import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import com.sygic.driving.testapp.R
 import com.sygic.driving.testapp.core.utils.asImmutableFlag
@@ -32,7 +33,7 @@ object NotificationUtils {
         }
     }
 
-    fun getNotification(context: Context, text: String): Notification {
+    fun getNotification(context: Context, text: String, @DrawableRes icon: Int): Notification {
         val intent = Intent(context, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(
             context,
@@ -43,7 +44,7 @@ object NotificationUtils {
 
         val builder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
         with(builder) {
-            setSmallIcon(R.drawable.ic_notif_small)
+            setSmallIcon(icon)
             setContentTitle(context.getString(R.string.app_name))
             setContentText(text)
             setLargeIcon(

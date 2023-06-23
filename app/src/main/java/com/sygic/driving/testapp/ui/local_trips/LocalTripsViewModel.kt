@@ -5,15 +5,22 @@ import androidx.lifecycle.viewModelScope
 import com.sygic.driving.testapp.R
 import com.sygic.driving.testapp.core.driving.DrivingManager
 import com.sygic.driving.testapp.core.utils.Resource
+import com.sygic.driving.testapp.core.utils.SingleEvent
+import com.sygic.driving.testapp.core.utils.UiEvent
 import com.sygic.driving.testapp.domain.driving.model.DrivingTripStorage
 import com.sygic.driving.testapp.domain.driving.use_case.DeleteTrip
 import com.sygic.driving.testapp.domain.driving.use_case.GetLocalTrips
 import com.sygic.driving.testapp.domain.driving.use_case.GetTripDevFiles
 import com.sygic.driving.testapp.domain.driving.use_case.SimulateTrip
-import com.sygic.driving.testapp.core.utils.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,8 +35,8 @@ class LocalTripsViewModel @Inject constructor(
 
     private val refreshTripsTrigger: MutableSharedFlow<Unit> = MutableSharedFlow(replay = 1)
 
-    private val _uiEvents = Channel<UiEvent>()
-    val uiEvents = _uiEvents.receiveAsFlow()
+    private val _uiEvents = SingleEvent<UiEvent>()
+    val uiEvents = _uiEvents.flow
 
     private val localTripsResource = combine(
         drivingManager.drivingInstance,
@@ -61,21 +68,21 @@ class LocalTripsViewModel @Inject constructor(
                 .actionLocalTripsFragmentToTripDetailsFragment(
                     DrivingTripStorage.Local, tripid
                 )
-            _uiEvents.send(UiEvent.NavigateTo(navDir))
+            _uiEvents.emit(UiEvent.NavigateTo(navDir))
         }
     }
 
     fun onTripSimulate(tripId: String) {
         viewModelScope.launch {
             simulateTrip(tripId)
-            _uiEvents.send(UiEvent.PopBackStack)
+            _uiEvents.emit(UiEvent.PopBackStack)
         }
     }
 
     fun onTripSimulateFast(tripId: String) {
         viewModelScope.launch {
             simulateTrip(tripId, playbackSpeed = 4.0f)
-            _uiEvents.send(UiEvent.PopBackStack)
+            _uiEvents.emit(UiEvent.PopBackStack)
         }
     }
 
@@ -83,9 +90,9 @@ class LocalTripsViewModel @Inject constructor(
         viewModelScope.launch {
             val files = getTripDeveloperFiles(tripId)
             if(files.isEmpty())
-                _uiEvents.send(UiEvent.ShowToast(R.string.local_trip_send_failed))
+                _uiEvents.emit(UiEvent.ShowToast(R.string.local_trip_send_failed))
             else
-                _uiEvents.send(UiEvent.ShareFiles(files))
+                _uiEvents.emit(UiEvent.ShareFiles(files))
         }
     }
 

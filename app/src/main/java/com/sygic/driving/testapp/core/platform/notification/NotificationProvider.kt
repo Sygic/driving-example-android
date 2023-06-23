@@ -10,11 +10,19 @@ class NotificationProvider(val context: Context):
     NotificationProvider {
 
     override fun getTripDetectionNotification(): Notification =
-        NotificationUtils.getNotification(context, context.getString(R.string.notification_recording_trips))
+        NotificationUtils.getNotification(
+            context,
+            context.getString(R.string.notification_recording_trips),
+            R.drawable.ic_notif_small
+        )
 
 
     override fun getTripStartedNotification(): Notification =
-        NotificationUtils.getNotification(context, context.getString(R.string.notification_trip_running))
+        NotificationUtils.getNotification(
+            context,
+            context.getString(R.string.notification_trip_running),
+            R.drawable.ic_car
+        )
 
     override fun getTripDetectionNotificationId(): Int = Constants.NOTIFICATION_ID_RECORDING
 
