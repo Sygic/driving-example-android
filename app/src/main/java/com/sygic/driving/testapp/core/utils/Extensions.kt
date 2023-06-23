@@ -12,6 +12,10 @@ import java.io.File
 val <T> T.exhaustive: T
     get() = this
 
+fun Context.checkPermission(permission: String): Boolean {
+    return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+}
+
 val WHILE_SUBSCRIBED_WITH_TIMEOUT = SharingStarted.WhileSubscribed(5000L)
 
 fun getDeviceName(): String {

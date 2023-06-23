@@ -133,6 +133,16 @@ fun Driving.systemLocationFlow(): Flow<Location> = callbackFlow {
     awaitClose { removeLocationListener(listener) }
 }
 
+fun Driving.computedLocationFlow(): Flow<Location> = callbackFlow {
+    val listener = object: Driving.LocationListener {
+        override fun onComputedLocation(location: Location) {
+            trySend(location)
+        }
+    }
+    addLocationListener(listener)
+    awaitClose { removeLocationListener(listener) }
+}
+
 // TODO namapovat na GPS z BT
 fun Driving.computedLocationFlow(): Flow<Location> = emptyFlow()
 //    callbackFlow {

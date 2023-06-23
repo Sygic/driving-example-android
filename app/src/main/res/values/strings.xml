@@ -134,4 +134,8 @@
     <string name="map.show_system_locations">System</string>
     <string name="map.show_computed_locations">Bluetooth</string>
 
+    <string name="map.show_locations">Show GPS positions</string>
+    <string name="map.show_system_locations">System</string>
+    <string name="map.show_computed_locations">Computed</string>
+
 </resources>
