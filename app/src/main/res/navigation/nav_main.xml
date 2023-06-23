@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_realtimeFragment_to_localTripsFragment"
             app:destination="@id/localTripsFragment" />
+        <action
+            android:id="@+id/action_realtimeFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/serverTripsFragment"
@@ -55,4 +58,10 @@
             android:name="tripId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.sygic.driving.testapp.ui.map.MapFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_map"
+        />
 </navigation>

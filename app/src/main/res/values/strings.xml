@@ -124,4 +124,8 @@
     <string name="trip_event.name.pothole">Pothole</string>
     <string name="trip_event.name.harsh">Harsh</string>
 
+    <string name="map.show_locations">Show GPS positions</string>
+    <string name="map.show_system_locations">System</string>
+    <string name="map.show_computed_locations">Computed</string>
+
 </resources>

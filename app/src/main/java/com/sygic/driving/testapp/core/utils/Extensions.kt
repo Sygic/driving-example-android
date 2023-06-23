@@ -88,6 +88,10 @@ fun Context.getAndroidId(): String {
     return Settings.System.getString(contentResolver, Settings.Secure.ANDROID_ID)
 }
 
+fun Context.checkPermission(permission: String): Boolean {
+    return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+}
+
 
 private val dateFormatHhMmSs = SimpleDateFormat("HH:mm:ss", Locale.US)
 

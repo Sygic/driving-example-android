@@ -8,6 +8,7 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.lifecycleScope
 import com.sygic.driving.*
 import com.sygic.driving.data.DetectorState
+import com.sygic.driving.data.TripState
 import com.sygic.driving.licensing.SygicLicense
 import com.sygic.driving.testapp.domain.driving.model.DrivingTripEvent
 import com.sygic.driving.testapp.domain.driving.model.DrivingTripState
@@ -64,6 +65,12 @@ class DrivingManager @Inject constructor(
         return@combine if(!active) null else initialize()
     }.stateIn(scope, SharingStarted.Eagerly, null)
 
+    private val _currentTripSystemLocations = MutableStateFlow<List<Location>>(emptyList())
+    val currentTripSystemLocations: StateFlow<List<Location>> = _currentTripSystemLocations.asStateFlow()
+
+    private val _currentTripComputedLocations = MutableStateFlow<List<Location>>(emptyList())
+    val currentTripComputedLocations: StateFlow<List<Location>> = _currentTripComputedLocations.asStateFlow()
+
     /**
      * Initializes Driving library with configuration from [AppSettings]. If library
      * is already initialized, nothing happens.
@@ -107,9 +114,14 @@ class DrivingManager @Inject constructor(
         driving.altitudeFlow()
     }.stateIn(scope, WHILE_SUBSCRIBED_WITH_TIMEOUT, 0.0)
 
-    val passiveLocation: StateFlow<Location> = drivingFlow { driving ->
-        driving.passiveLocationFlow()
-    }.stateIn(scope, WHILE_SUBSCRIBED_WITH_TIMEOUT, Location(""))
+    val systemLocation: StateFlow<Location?> = drivingFlow { driving ->
+        driving.systemLocationFlow()
+    }.stateIn(scope, WHILE_SUBSCRIBED_WITH_TIMEOUT, null)
+
+    val computedLocation: StateFlow<Location?> = drivingFlow { driving ->
+        driving.computedLocationFlow()
+            .filter { ComputedLocationsFilter.take(it) }
+    }.stateIn(scope, WHILE_SUBSCRIBED_WITH_TIMEOUT, null)
 
     private suspend fun initialize(): Driving? {
 
@@ -117,7 +129,7 @@ class DrivingManager @Inject constructor(
         _initState.value = initResult
 
         return if (initResult == Driving.InitState.Initialized) {
-            startCollectingSettings()
+            launchDrivingJobs()
             Driving.getInstance()
         }
         else
@@ -126,6 +138,9 @@ class DrivingManager @Inject constructor(
 
     private fun deinitializeInternal() {
         _initState.value = Driving.InitState.Uninitialized
+
+        _currentTripSystemLocations.value = emptyList()
+        _currentTripComputedLocations.value = emptyList()
 
         cancelAllJobs()
 
@@ -183,7 +198,7 @@ class DrivingManager @Inject constructor(
         )
     }
 
-    private fun startCollectingSettings() {
+    private fun launchDrivingJobs() {
         cancelAllJobs()
 
         // change configuration
@@ -228,6 +243,37 @@ class DrivingManager @Inject constructor(
             }
         }
         jobs.add(tripDetectionJob)
+
+        // update current trip system locations
+        val systemLocationsJob = scope.launch {
+            systemLocation
+                .filterNotNull()
+                .collect {
+                _currentTripSystemLocations.value = _currentTripSystemLocations.value + it
+            }
+        }
+        jobs.add(systemLocationsJob)
+
+        // update current trip computed locations
+        val computedLocationsJob = scope.launch {
+            computedLocation
+                .filterNotNull()
+                .collect {
+                _currentTripComputedLocations.value = _currentTripComputedLocations.value + it
+            }
+        }
+        jobs.add(computedLocationsJob)
+
+        // reset current trip locations on start of new trip
+        val tripStartJob = scope.launch {
+            tripState
+                .filter { it.state == TripState.Started }
+                .collect {
+                    _currentTripSystemLocations.value = emptyList()
+                    _currentTripComputedLocations.value = emptyList()
+                }
+        }
+        jobs.add(tripStartJob)
     }
 
     private fun cancelAllJobs() {

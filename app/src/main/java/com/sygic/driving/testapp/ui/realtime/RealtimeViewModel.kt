@@ -70,7 +70,8 @@ class RealtimeViewModel @Inject constructor(
     val harsh: Flow<DrivingTripEvent> =
         drivingManager.events.filter { it.type == TripEventType.Harsh }
 
-    val speed: Flow<Float> = drivingManager.passiveLocation
+    val speed: Flow<Float> = drivingManager.systemLocation
+        .filterNotNull()
         .map { it.speed }
 
     val tripStartTime: StateFlow<Date?> = drivingManager.tripState

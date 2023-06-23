@@ -56,6 +56,10 @@ class TripDetailsFragment : Fragment() {
             viewModel.onMapReady()
         }
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // title
         launchAndRepeatWithViewLifecycle {
             combine(
@@ -115,13 +119,11 @@ class TripDetailsFragment : Fragment() {
                 binding.error.text = error ?: ""
             }
         }
-
-        return binding.root
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         viewModel.onMapDestroyed()
-        super.onDestroy()
+        super.onDestroyView()
     }
 
     private fun Date.toTripName(): String {
